@@ -1,0 +1,83 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		jcenter()
+	}
+	dependencies {
+        classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.1'
+		classpath 'net.saliman:gradle-cobertura-plugin:2.2.4'
+		classpath 'com.fizzpod:gradle-extended-info-plugin:0.1.4'
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'cobertura'
+apply plugin: 'pl.allegro.tech.build.axion-release'
+apply plugin: 'com.fizzpod.info'
+apply plugin: 'project-report'
+apply plugin: 'com.fizzpod.sweeney'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'buildSrc/src/main/java'
+        }
+        resources {
+            srcDir 'buildSrc/src/main/resources'
+        }
+		groovy {
+		    srcDir 'buildSrc/src/main/groovy'
+		}
+	}
+	test {
+        java {
+            srcDir 'buildSrc/src/test/java'
+        }
+        resources {
+            srcDir 'buildSrc/src/test/resources'
+        }
+		groovy {
+		    srcDir 'buildSrc/src/test/groovy'
+		}
+	}
+}
+
+repositories {
+	mavenLocal()
+	jcenter()
+}
+
+
+scmVersion {
+    tag {
+        prefix = 'release'
+    }
+}
+
+group = 'com.fizzpod'
+version = scmVersion.version
+
+dependencies {
+	compile gradleApi()
+	compile localGroovy()
+	
+	testCompile('com.netflix.nebula:nebula-test:2.2.+') {
+        exclude group: 'org.codehaus.groovy'
+    }
+}
+
+artifacts {
+	jar
+}
+
+cobertura {
+    coverageFormats = ['html', 'xml']				
+    coverageIgnoreTrivial = true					
+    coverageIgnores = ['org.slf4j.Logger.*']			
+    coverageReportDir = new File("$buildDir/reports/cobertura")	
+}
+
+test.finalizedBy(project.tasks.cobertura)
