@@ -17,16 +17,16 @@ apply from: 'build.gradle'
 
 plugindev {
 	pluginId 'com.fizzpod.layout'
-    pluginImplementationClass 'com.fizzpod.gradle.plugins.layout.LayoutPlugin'
-    pluginDescription 'Gradle plugin to providing configuration mechanism to create a layout.'
+    pluginImplementationClass 'com.fizzpod.gradle.plugins.sweeney.SweeneyPlugin'
+    pluginDescription 'Gradle plugin providing ability to enforce build rules.'
     pluginLicenses 'Apache-2.0'
-    pluginTags 'gradle', 'plugin', 'layout', 'template'
+    pluginTags 'gradle', 'plugin', 'enforce', 'rules'
     authorId System.env.BINTRAY_USER
     authorName System.env.BINTRAY_AUTHOR
     authorEmail System.env.BINTRAY_EMAIL
-    projectUrl 'https://github.com/boxheed/gradle-layout-plugin'
-	projectIssuesUrl 'https://github.com/boxheed/gradle-layout-plugin/issues'
-	projectVcsUrl 'https://github.com/boxheed/gradle-layout-plugin.git'
+    projectUrl 'https://github.com/boxheed/gradle-sweeney-plugin'
+	projectIssuesUrl 'https://github.com/boxheed/gradle-sweeney-plugin/issues'
+	projectVcsUrl 'https://github.com/boxheed/gradle-sweeney-plugin.git'
     projectInceptionYear '2015'
     done() // do not omit this
 }
