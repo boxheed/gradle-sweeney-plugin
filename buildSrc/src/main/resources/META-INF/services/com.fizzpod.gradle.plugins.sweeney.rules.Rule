@@ -1,0 +1,2 @@
+#com.fizzpod.gradle.plugins.info.ci.ServiceLoadedContinuousIntegrationInfoProvider
+com.fizzpod.gradle.plugins.sweeney.rules.SimpleRule

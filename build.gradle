@@ -72,14 +72,20 @@ dependencies {
 
 
 sweeney {
+
+	enforce type: {"simple"}, name: {"Simple Static Values"}, expect: {"1.7"}, value: {System.getProperty('java.version').substring(0,3)}
+	//enforce type: "simple", name: "Simple Static Values", test: "1.2.3", value: "1.2.3"	
+
+
+/*
 	//Map pattern
-	enforce abc: "123", xyz: "321"
+	enforce name: "jdk", version: "321"
 	
 	//Map, Closure combo
-	enforce abc: {println "closure"}, xyz: "987"
+	enforce name: "jdk", xyz: {println "closure"}
 
 	//Notation pattern
-	enforce "rulename:parameter1:parameter2"
+	enforce "jdk:parameter2"
 
 	//Closure
 	enforce {
@@ -91,6 +97,7 @@ sweeney {
 	caution {
 		
 	}
+	*/
 }
 
 artifacts {
