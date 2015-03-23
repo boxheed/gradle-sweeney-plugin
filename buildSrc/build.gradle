@@ -1,0 +1,12 @@
+repositories {
+	jcenter()
+}
+
+dependencies {
+
+	testCompile('com.netflix.nebula:nebula-test:2.2.+') {
+        exclude group: 'org.codehaus.groovy'
+    }
+}
+
+

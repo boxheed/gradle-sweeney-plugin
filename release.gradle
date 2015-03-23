@@ -16,11 +16,11 @@ plugins {
 apply from: 'build.gradle'
 
 plugindev {
-	pluginId 'com.fizzpod.layout'
+	pluginId 'com.fizzpod.sweeney'
     pluginImplementationClass 'com.fizzpod.gradle.plugins.sweeney.SweeneyPlugin'
     pluginDescription 'Gradle plugin providing ability to enforce build rules.'
     pluginLicenses 'Apache-2.0'
-    pluginTags 'gradle', 'plugin', 'enforce', 'rules'
+    pluginTags 'gradle', 'plugin', 'enforce', 'rules', 'sweeney'
     authorId System.env.BINTRAY_USER
     authorName System.env.BINTRAY_AUTHOR
     authorEmail System.env.BINTRAY_EMAIL
