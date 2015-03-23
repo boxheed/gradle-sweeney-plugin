@@ -20,7 +20,7 @@ before_script:
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
   - mkdir -p shippable/artifacts
-  - git remote set-url origin git@github.com:boxheed/gradle-layout-plugin.git
+  - git remote set-url origin git@github.com:$REPO_NAME.git
   
 script:
   - ./gradlew clean build
