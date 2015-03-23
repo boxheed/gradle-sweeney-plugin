@@ -2,10 +2,10 @@ package com.fizzpod.gradle.plugins.sweeney.rules
 
 interface Rule {
 	
-	String getName()
+	String getType();
 	
-	boolean accept()
+	boolean accept(RuleDefinition ruleDefinition)
 	
-	boolean validate()
+	boolean validate(def scope, RuleDefinition ruleDefinition)
 	
 }
