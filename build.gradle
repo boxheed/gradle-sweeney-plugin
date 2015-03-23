@@ -72,14 +72,21 @@ dependencies {
 
 
 sweeney {
+	//Map pattern
+	enforce abc: "123", xyz: "321"
+	
+	//Map, Closure combo
+	enforce abc: {println "closure"}, xyz: "987"
 
-	enforce "enforce_rule_pattern"
+	//Notation pattern
+	enforce "rulename:parameter1:parameter2"
 
+	//Closure
 	enforce {
 		
 	}
 	
-	caution "caution_rule_pattern"
+	caution "rulename:parameter1:parameter2"
 	
 	caution {
 		
