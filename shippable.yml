@@ -24,7 +24,7 @@ before_script:
   
 script:
   - ./gradlew clean build
-#  - set -e; if [ "$HEAD_BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew -b release.gradle clean build publishPluginToBintray; fi
+  - set -e; if [ "$HEAD_BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew -b release.gradle clean build publishPluginToBintray; fi
   
 after_script:
   - cp -R ./build/test-results/* ./shippable/testresults
