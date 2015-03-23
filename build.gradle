@@ -75,6 +75,7 @@ sweeney {
 
 
 	caution type: {"simple"}, name: {"JDK 1.7"}, expect: {"1.7"}, value: {System.getProperty('java.version')}
+	caution 'simple:1234:12345'
 
 /*
 	//Map pattern

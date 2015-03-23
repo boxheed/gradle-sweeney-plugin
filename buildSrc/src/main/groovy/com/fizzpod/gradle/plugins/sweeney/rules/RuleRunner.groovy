@@ -28,10 +28,11 @@ public class RuleRunner {
 
 	void convertAndApplyRule(def scope, def ruleDefinition) {
 		def convertedRuleDefinition = null;
-		new RuleDefinitionParserLoader().all()
-		.each { it ->
-			LOGGER.info("Using parser: {}", it)
-			convertedRuleDefinition = it.parse(ruleDefinition);
+		new RuleDefinitionParserLoader().all().each { it ->
+			LOGGER.debug("Using parser: {}", it)
+			if(convertedRuleDefinition == null) {
+				convertedRuleDefinition = it.parse(ruleDefinition);
+			}
 		}
 		if(convertedRuleDefinition != null) {
 			applyRule(scope, convertedRuleDefinition);
@@ -43,9 +44,9 @@ public class RuleRunner {
 
 	void applyRule(def scope, def ruleDefinition) {
 		ruleLoader.all().each { it ->
-			LOGGER.debug("Checking whether rule {} accepts definition {}", it.getType(), ruleDefinition);
+			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), ruleDefinition);
 			if(it.accept(ruleDefinition)) {
-				LOGGER.debug("Testing definition {} with rule {}", ruleDefinition, it.getType())
+				LOGGER.info("Testing definition {} with rule {}", ruleDefinition, it.getType())
 				try {
 					it.validate(scope, ruleDefinition);
 				} catch(AssertionError e) {
