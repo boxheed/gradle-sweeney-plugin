@@ -20,7 +20,7 @@ class MapRuleDefinitionParser implements RuleDefinitionParser {
 		def newDefinition = [:];
 		definition.each{ k, v ->
 			def value = v;
-			if(! v instanceof Closure) {
+			if(!( v instanceof Closure)) {
 				value = {v}
 			}
 			newDefinition.put(k, value);

@@ -7,27 +7,27 @@ class SimpleRule implements Rule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SimpleRule); 
 	
-	public static final String TYPE_SIMPLE = "simple"
+	public static final String SIMPLE_TYPE_VALUE = "simple"
 
 	@Override
 	public String getType() {
-		return TYPE_SIMPLE;
+		return SIMPLE_TYPE_VALUE;
 	}
 
 	@Override
 	public boolean accept(RuleDefinition ruleDefinition) {
-		if(ruleDefinition.hasAttribute("type") && TYPE_SIMPLE.equals(ruleDefinition.getAttribute("type").call())) {
+		if(ruleDefinition.hasAttribute(TYPE_ATTRIBUTE) && SIMPLE_TYPE_VALUE.equals(ruleDefinition.getAttribute(TYPE_ATTRIBUTE).call())) {
 			return true;
 		} 
 		return false;
 	}
 
 	@Override
-	public boolean validate(def scope, RuleDefinition ruleDefinition) {
+	public void validate(def scope, RuleDefinition ruleDefinition) {
 		def value = ruleDefinition.getAttribute("value").call(); 
-		def expected = ruleDefinition.getAttribute("expect").call();
-		LOGGER.info("Testing {} with {} rule", ruleDefinition, getType());
-		return value.equals(expected);
+		def expect = ruleDefinition.getAttribute("expect").call();
+		LOGGER.info("Checking value {} with expected {}", value, expect);
+		assert value.equals(expect), 'Validation failed for rule definition' + ruleDefinition
 	}
 
 	@Override

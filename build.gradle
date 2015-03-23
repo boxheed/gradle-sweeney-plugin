@@ -63,7 +63,6 @@ version = scmVersion.version
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'org.apache.ivy:ivy:2.2.0'
 	
 	testCompile('com.netflix.nebula:nebula-test:2.2.+') {
         exclude group: 'org.codehaus.groovy'
@@ -73,9 +72,11 @@ dependencies {
 
 sweeney {
 
-	enforce type: {"simple"}, name: {"Simple Static Values"}, expect: {"1.7"}, value: {System.getProperty('java.version').substring(0,3)}
-	//enforce type: "simple", name: "Simple Static Values", test: "1.2.3", value: "1.2.3"	
+	
+	enforce type: "simple", name: "JDK 1.7", expect: "1.7", value: {System.getProperty('java.version').substring(0,3)}
 
+
+	caution type: {"simple"}, name: {"JDK 1.7"}, expect: {"1.7"}, value: {System.getProperty('java.version')}
 
 /*
 	//Map pattern
