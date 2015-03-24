@@ -80,7 +80,7 @@ sweeney {
 	caution type: 'jdk', expect: ']1.7,)'
 	caution type: 'pattern', expect: '1\\.8.*', value: {System.getProperty('java.version')}
 	
-	caution 'gradle:]2.2.1,)'
+	enforce 'gradle:[2.3,)'
 }
 
 artifacts {
