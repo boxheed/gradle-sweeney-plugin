@@ -80,6 +80,8 @@ sweeney {
 	caution type: 'jdk', expect: ']1.7,)'
 	caution type: 'pattern', expect: '1\\.8.*', value: {System.getProperty('java.version')}
 	
+	caution type: 'gradle', expect: ']2.2.1,)'
+	
 /*
 	//Map pattern
 	enforce name: "jdk", version: "321"
