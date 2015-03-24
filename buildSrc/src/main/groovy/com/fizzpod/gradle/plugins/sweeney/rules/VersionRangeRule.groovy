@@ -75,8 +75,6 @@ class VersionRangeRule implements Rule {
 	+ LOWER_INFINITE_PATTERN + "|" + UPPER_INFINITE_PATTERN);
 
 
-	//[0-9]+(\\.[0-9]+)*
-//	private static final Pattern VERSION_EXTRACT_PATTERN = Pattern.compile(".*(\\d+[\\d\\\\.]*).*");
 	private static final Pattern VERSION_EXTRACT_PATTERN = Pattern.compile(".*?([0-9]+(?:\\.[0-9]+)*).*");
 
 	public static final String VERSION_RANGE_TYPE_VALUE = "range"
@@ -91,10 +89,10 @@ class VersionRangeRule implements Rule {
 		if(isRequiredType(ruleDefinition) &&
 		hasRequiredAttributes(ruleDefinition) &&
 		expectPatternSupported(ruleDefinition)) {
-			println "Accepting definition: $ruleDefinition"
+			LOGGER.info("Accepting definition: {}", ruleDefinition)
 			return true;
 		}
-		println "Rejecting definition: $ruleDefinition"
+		LOGGER.info("Rejecting definition: {}", ruleDefinition)
 		return false;
 	}
 
@@ -115,21 +113,12 @@ class VersionRangeRule implements Rule {
 
 	@Override
 	public void validate(Object scope, RuleDefinition ruleDefinition) {
-		println "Validating $ruleDefinition"
+		LOGGER.info("Validating {}", ruleDefinition)
 		String expect = getExpect(ruleDefinition);
 		Version version = getVersion(ruleDefinition);
-		println(version);
 		LowerVersion lowerVersion = getLowerVersion(expect);
-		println(lowerVersion)
 		UpperVersion upperVersion = getUpperVersion(expect);
-		println(upperVersion)
-		assert isBetween(version, lowerVersion, upperVersion)
-	}
-
-	private boolean isBetween(Version version, LowerVersion lowerVersion, UpperVersion upperVersion) {
-		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version))
-		return true;
-
+		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), "Rule is not valid, $ruleDefinition" 
 	}
 
 	private String getExpect(RuleDefinition ruleDefinition) {
