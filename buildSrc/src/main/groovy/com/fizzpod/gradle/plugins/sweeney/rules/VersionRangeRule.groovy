@@ -118,7 +118,7 @@ class VersionRangeRule implements Rule {
 		Version version = getVersion(ruleDefinition);
 		LowerVersion lowerVersion = getLowerVersion(expect);
 		UpperVersion upperVersion = getUpperVersion(expect);
-		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), "Rule is not valid, $ruleDefinition" 
+		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), "Version $version is not within specification: $ruleDefinition" 
 	}
 
 	private String getExpect(RuleDefinition ruleDefinition) {
