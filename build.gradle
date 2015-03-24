@@ -81,28 +81,6 @@ sweeney {
 	caution type: 'pattern', expect: '1\\.8.*', value: {System.getProperty('java.version')}
 	
 	caution 'gradle:]2.2.1,)'
-	
-/*
-	//Map pattern
-	enforce name: "jdk", version: "321"
-	
-	//Map, Closure combo
-	enforce name: "jdk", xyz: {println "closure"}
-
-	//Notation pattern
-	enforce "jdk:parameter2"
-
-	//Closure
-	enforce {
-		
-	}
-	
-	caution "rulename:parameter1:parameter2"
-	
-	caution {
-		
-	}
-	*/
 }
 
 artifacts {
