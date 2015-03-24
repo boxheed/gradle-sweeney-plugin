@@ -11,7 +11,7 @@ class RuleLoaderSpec extends ProjectSpec {
 		then:
 		def parsers = loader.all();
 		parsers != null
-		parsers.size() == 2
+		parsers.size() == 3
 	}
 	
 }

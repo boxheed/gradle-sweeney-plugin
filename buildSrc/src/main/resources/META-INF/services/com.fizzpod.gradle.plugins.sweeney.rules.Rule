@@ -1,2 +1,3 @@
 com.fizzpod.gradle.plugins.sweeney.rules.VersionRangeRule
+com.fizzpod.gradle.plugins.sweeney.rules.PatternRule
 com.fizzpod.gradle.plugins.sweeney.rules.SimpleRule
