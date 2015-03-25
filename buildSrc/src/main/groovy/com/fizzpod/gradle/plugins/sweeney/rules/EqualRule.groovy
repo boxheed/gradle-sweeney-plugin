@@ -3,11 +3,11 @@ package com.fizzpod.gradle.plugins.sweeney.rules
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class SimpleRule implements Rule {
+class EqualRule implements Rule {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(SimpleRule); 
+	private static final Logger LOGGER = LoggerFactory.getLogger(EqualRule); 
 	
-	public static final String SIMPLE_TYPE_VALUE = "simple"
+	public static final String SIMPLE_TYPE_VALUE = "equal"
 
 	@Override
 	public String getType() {

@@ -2,13 +2,13 @@ package com.fizzpod.gradle.plugins.sweeney.rules
 
 import nebula.test.ProjectSpec
 
-class SimpleRuleSpec extends ProjectSpec {
+class EqualRuleSpec extends ProjectSpec {
 
-	SimpleRule simpleRule = new SimpleRule();
+	EqualRule simpleRule = new EqualRule();
 
 	def 'simple rule abc is equal to abc'() {
 		setup:
-			def stringDefinition = "simple:abc:abc"
+			def stringDefinition = "equal:abc:abc"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = simpleRule.accept(definition)
@@ -20,7 +20,7 @@ class SimpleRuleSpec extends ProjectSpec {
 	
 	def 'simple rule abc is not equal to def'() {
 		setup:
-			def stringDefinition = "simple:abc:def"
+			def stringDefinition = "equal:abc:def"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = simpleRule.accept(definition)
