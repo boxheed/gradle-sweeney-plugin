@@ -69,17 +69,7 @@ dependencies {
 
 
 sweeney {
-
-	
-	enforce type: "equal", name: "JDK 1.7", expect: "1.7", value: {System.getProperty('java.version').substring(0,3)}
-
-
-	caution type: {"equal"}, name: {"JDK 1.7"}, expect: {"1.7"}, value: {System.getProperty('java.version')}
-	caution 'simple:1234:12345'
-	caution type: 'range', expect: ']1.7,)', value: {System.getProperty('java.version')}
-	caution type: 'jdk', expect: ']1.7,)'
-	caution type: 'pattern', expect: '1\\.8.*', value: {System.getProperty('java.version')}
-	
+	enforce 'jdk:[1.7,)'
 	enforce 'gradle:[2.3,)'
 }
 
