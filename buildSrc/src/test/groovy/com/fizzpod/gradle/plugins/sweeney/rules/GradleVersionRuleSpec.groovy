@@ -11,8 +11,8 @@ class GradleVersionRuleSpec extends ProjectSpec {
 			def stringDefinition = "gradle:[2.0,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = gradleVersionRule.accept(definition)
-			gradleVersionRule.validate(project, definition);
+			def accept = gradleVersionRule.accept(definition, project)
+			gradleVersionRule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -23,8 +23,8 @@ class GradleVersionRuleSpec extends ProjectSpec {
 			def stringDefinition = "gradle:]2.3,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = gradleVersionRule.accept(definition)
-			gradleVersionRule.validate(project, definition);
+			def accept = gradleVersionRule.accept(definition, project)
+			gradleVersionRule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;

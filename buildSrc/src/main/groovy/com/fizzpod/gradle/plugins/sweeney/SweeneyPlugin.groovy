@@ -35,7 +35,7 @@ public class SweeneyPlugin implements Plugin<Project> {
 		
 		RuleRunner runner = new RuleRunner(RunMode.ENFORCE);
 		
-		runner.applyRules(scope, theSweeney.enforceableRules)
+		runner.applyRules(theSweeney.enforceableRules, scope)
 	}
 	
 	void runCautionRules(def project, def scope) {
@@ -43,7 +43,7 @@ public class SweeneyPlugin implements Plugin<Project> {
 		
 		RuleRunner runner = new RuleRunner(RunMode.CAUTION);
 		
-		runner.applyRules(scope, theSweeney.cautionaryRules)
+		runner.applyRules(theSweeney.cautionaryRules, scope)
 		
 	}
 	

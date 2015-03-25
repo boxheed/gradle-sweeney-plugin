@@ -8,8 +8,8 @@ interface Rule {
 	
 	String getType();
 	
-	boolean accept(RuleDefinition ruleDefinition)
+	boolean accept(RuleDefinition ruleDefinition, def scope)
 	
-	void validate(def scope, RuleDefinition ruleDefinition)
+	void validate(RuleDefinition ruleDefinition, def scope)
 	
 }
