@@ -26,5 +26,14 @@ class RuleRunnerSpec extends ProjectSpec {
 			new RuleRunner(RunMode.ENFORCE).applyRules(definitions, project)
 		then:
 			thrown(IllegalArgumentException)
+
+	}
+	
+	def 'bad definition should throw an illegal argument exception'() {
+		when:
+			def definitions = [123]
+			new RuleRunner(RunMode.ENFORCE).applyRules(definitions, project)
+		then:
+			thrown(IllegalArgumentException)
 	}
 }
