@@ -1,2 +1,5 @@
-#com.fizzpod.gradle.plugins.info.ci.ServiceLoadedContinuousIntegrationInfoProvider
-com.fizzpod.gradle.plugins.sweeney.rules.SimpleRule
+com.fizzpod.gradle.plugins.sweeney.rules.VersionRangeRule
+com.fizzpod.gradle.plugins.sweeney.rules.JdkVersionRule
+com.fizzpod.gradle.plugins.sweeney.rules.GradleVersionRule
+com.fizzpod.gradle.plugins.sweeney.rules.PatternRule
+com.fizzpod.gradle.plugins.sweeney.rules.EqualRule
