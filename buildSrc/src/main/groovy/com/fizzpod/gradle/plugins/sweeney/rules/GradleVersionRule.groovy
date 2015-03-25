@@ -38,7 +38,8 @@ class GradleVersionRule implements Rule {
 	@Override
 	public void validate(def scope, RuleDefinition ruleDefinition) {
 		if(scope instanceof Project) {
-			ruleDefinition = convertForVersionRangeRule(ruleDefinition, ((Project)scope).gradle.gradleVersion)
+			def version = ((Project)scope).gradle.gradleVersion;
+			ruleDefinition = convertForVersionRangeRule(ruleDefinition, version)
 			versionRangeRule.validate(scope, ruleDefinition)
 		}
 	}
