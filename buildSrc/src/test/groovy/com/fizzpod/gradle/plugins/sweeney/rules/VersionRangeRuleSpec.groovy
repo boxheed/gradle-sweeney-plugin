@@ -104,6 +104,88 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			accept == true;
 	}
 	
+	def 'versions between version range'() {
+		setup:
+			def stringDefinition = "range:[2.0,3.0]:2.5"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			notThrown(AssertionError)
+			accept == true;
+	}
 	
+	def 'versions at lower version range'() {
+		setup:
+			def stringDefinition = "range:[2.0,3.0]:2."
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			notThrown(AssertionError)
+			accept == true;
+	}
+	
+	def 'versions at upper version range'() {
+		setup:
+			def stringDefinition = "range:[2.0,3]:3.0"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			notThrown(AssertionError)
+			accept == true;
+	}
+	
+	def 'versions at lower version range excluded'() {
+		setup:
+			def stringDefinition = "range:]2.0,3.0]:2."
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			thrown(AssertionError)
+			accept == true;
+	}
+	
+	def 'versions at upper version range excluded'() {
+		setup:
+			def stringDefinition = "range:[2.0,3[:3.0"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			thrown(AssertionError)
+			accept == true;
+	}
+	
+	def 'versions at below version range'() {
+		setup:
+			def stringDefinition = "range:[2.0,3.0]:1"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			thrown(AssertionError)
+			accept == true;
+	}
+	
+	def 'versions above version range excluded'() {
+		setup:
+			def stringDefinition = "range:[2.0,3]:4.0"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition)
+			rule.validate(project, definition);
+		then:
+			thrown(AssertionError)
+			accept == true;
+	}
 	
 }
