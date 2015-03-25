@@ -18,10 +18,10 @@ class JdkVersionRule implements Rule {
 	}
 
 	@Override
-	public boolean accept(RuleDefinition ruleDefinition) {
+	public boolean accept(RuleDefinition ruleDefinition, def scope) {
 		if(ruleDefinition.hasAttribute(TYPE_ATTRIBUTE) && JDK_TYPE_VALUE.equals(ruleDefinition.getAttribute(TYPE_ATTRIBUTE).call())) {
 			ruleDefinition = convertForVersionRangeRule(ruleDefinition);
-			return versionRangeRule.accept(ruleDefinition);
+			return versionRangeRule.accept(ruleDefinition, scope);
 		} 
 		return false;
 	}
@@ -35,8 +35,8 @@ class JdkVersionRule implements Rule {
 	}
 
 	@Override
-	public void validate(def scope, RuleDefinition ruleDefinition) {
-		versionRangeRule.validate(scope, convertForVersionRangeRule(ruleDefinition))
+	public void validate(RuleDefinition ruleDefinition, def scope) {
+		versionRangeRule.validate(convertForVersionRangeRule(ruleDefinition), scope)
 	}
 
 	@Override

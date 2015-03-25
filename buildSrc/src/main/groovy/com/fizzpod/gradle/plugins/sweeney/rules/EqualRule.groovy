@@ -15,7 +15,7 @@ class EqualRule implements Rule {
 	}
 
 	@Override
-	public boolean accept(RuleDefinition ruleDefinition) {
+	public boolean accept(RuleDefinition ruleDefinition, def scope) {
 		if(ruleDefinition.hasAttribute(TYPE_ATTRIBUTE) && SIMPLE_TYPE_VALUE.equals(ruleDefinition.getAttribute(TYPE_ATTRIBUTE).call())) {
 			return true;
 		} 
@@ -23,7 +23,7 @@ class EqualRule implements Rule {
 	}
 
 	@Override
-	public void validate(def scope, RuleDefinition ruleDefinition) {
+	public void validate(RuleDefinition ruleDefinition, def scope) {
 		def value = ruleDefinition.getAttribute("value").call(); 
 		def expect = ruleDefinition.getAttribute("expect").call();
 		LOGGER.info("Checking value {} with expected {}", value, expect);

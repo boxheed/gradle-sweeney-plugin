@@ -11,8 +11,8 @@ class EqualRuleSpec extends ProjectSpec {
 			def stringDefinition = "equal:abc:abc"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = simpleRule.accept(definition)
-			simpleRule.validate(project, definition);
+			def accept = simpleRule.accept(definition, project)
+			simpleRule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -23,8 +23,8 @@ class EqualRuleSpec extends ProjectSpec {
 			def stringDefinition = "equal:abc:def"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = simpleRule.accept(definition)
-			simpleRule.validate(project, definition);
+			def accept = simpleRule.accept(definition, project)
+			simpleRule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;

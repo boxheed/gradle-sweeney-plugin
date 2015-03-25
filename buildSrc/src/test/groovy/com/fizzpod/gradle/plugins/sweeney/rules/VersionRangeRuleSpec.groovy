@@ -11,8 +11,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,):2.0" 
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -23,8 +23,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,):3.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -36,8 +36,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:]2.0,):2.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -48,8 +48,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,):1.8"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -60,8 +60,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:(,2.0]:2.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -72,8 +72,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:(,2.0]:1.8"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -85,8 +85,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:(,2.0[:2.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -97,8 +97,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:(,2.0]:2.0.1"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -109,8 +109,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,3.0]:2.5"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -121,8 +121,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,3.0]:2."
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -133,8 +133,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,3]:3.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -145,8 +145,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:]2.0,3.0]:2."
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -157,8 +157,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,3[:3.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -169,8 +169,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,3.0]:1"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
@@ -181,8 +181,8 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def stringDefinition = "range:[2.0,3]:4.0"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = rule.accept(definition)
-			rule.validate(project, definition);
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;
