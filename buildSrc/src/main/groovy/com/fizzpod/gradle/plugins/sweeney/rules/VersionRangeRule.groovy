@@ -85,7 +85,7 @@ class VersionRangeRule implements Rule {
 	}
 
 	@Override
-	public boolean accept(RuleDefinition ruleDefinition) {
+	public boolean accept(RuleDefinition ruleDefinition, def scope) {
 		if(isRequiredType(ruleDefinition) &&
 		hasRequiredAttributes(ruleDefinition) &&
 		expectPatternSupported(ruleDefinition)) {
@@ -112,7 +112,7 @@ class VersionRangeRule implements Rule {
 	}
 
 	@Override
-	public void validate(Object scope, RuleDefinition ruleDefinition) {
+	public void validate(RuleDefinition ruleDefinition, def scope) {
 		LOGGER.info("Validating {}", ruleDefinition)
 		String expect = getExpect(ruleDefinition);
 		Version version = getVersion(ruleDefinition);

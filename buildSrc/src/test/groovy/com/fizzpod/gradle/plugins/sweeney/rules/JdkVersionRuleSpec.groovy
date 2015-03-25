@@ -11,8 +11,8 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			def stringDefinition = "jdk:[1.7,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = jdkVersionRule.accept(definition)
-			jdkVersionRule.validate(project, definition);
+			def accept = jdkVersionRule.accept(definition, project)
+			jdkVersionRule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
 			accept == true;
@@ -23,8 +23,8 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			def stringDefinition = "jdk:]1.7,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
-			def accept = jdkVersionRule.accept(definition)
-			jdkVersionRule.validate(project, definition);
+			def accept = jdkVersionRule.accept(definition, project)
+			jdkVersionRule.validate(definition, project);
 		then:
 			thrown(AssertionError)
 			accept == true;

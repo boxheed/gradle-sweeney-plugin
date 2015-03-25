@@ -19,10 +19,10 @@ class GradleVersionRule implements Rule {
 	}
 
 	@Override
-	public boolean accept(RuleDefinition ruleDefinition) {
+	public boolean accept(RuleDefinition ruleDefinition, def scope) {
 		if(ruleDefinition.hasAttribute(TYPE_ATTRIBUTE) && GRADLE_TYPE_VALUE.equals(ruleDefinition.getAttribute(TYPE_ATTRIBUTE).call())) {
 			ruleDefinition = convertForVersionRangeRule(ruleDefinition, "placeholder");
-			return versionRangeRule.accept(ruleDefinition);
+			return versionRangeRule.accept(ruleDefinition, scope);
 		} 
 		return false;
 	}
@@ -36,11 +36,11 @@ class GradleVersionRule implements Rule {
 	}
 
 	@Override
-	public void validate(def scope, RuleDefinition ruleDefinition) {
+	public void validate(RuleDefinition ruleDefinition, def scope) {
 		if(scope instanceof Project) {
 			def version = ((Project)scope).gradle.gradleVersion;
 			ruleDefinition = convertForVersionRangeRule(ruleDefinition, version)
-			versionRangeRule.validate(scope, ruleDefinition)
+			versionRangeRule.validate(ruleDefinition, scope)
 		}
 	}
 
