@@ -18,15 +18,15 @@ public class RuleRunner {
 	}
 
 
-	public void applyRules(def scope, def ruleDefinitions) {
+	public void applyRules(def ruleDefinitions, def scope) {
 
 		ruleDefinitions.each { ruleDefinition ->
 			LOGGER.debug("Applying rule: {}", ruleDefinition);
-			convertAndApplyRule(scope, ruleDefinition);
+			convertAndApplyRule(ruleDefinition, scope);
 		}
 	}
 
-	void convertAndApplyRule(def scope, def ruleDefinition) {
+	void convertAndApplyRule(def ruleDefinition, def scope) {
 		def convertedRuleDefinition = null;
 		new RuleDefinitionParserLoader().all().each { it ->
 			LOGGER.debug("Using parser: {}", it)
@@ -35,20 +35,20 @@ public class RuleRunner {
 			}
 		}
 		if(convertedRuleDefinition != null) {
-			applyRule(scope, convertedRuleDefinition);
+			applyRule(convertedRuleDefinition, scope);
 		} else {
 			LOGGER.error("Unable to parse rule: {}", ruleDefinition);
 			throw new IllegalArgumentException("Unable to parse rule: " + ruleDefinition);
 		}
 	}
 
-	void applyRule(def scope, def ruleDefinition) {
+	void applyRule(def ruleDefinition, def scope) {
 		ruleLoader.all().each { it ->
 			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), ruleDefinition);
-			if(it.accept(ruleDefinition)) {
+			if(it.accept(ruleDefinition, scope)) {
 				LOGGER.info("Testing definition {} with rule {}", ruleDefinition, it.getType())
 				try {
-					it.validate(scope, ruleDefinition);
+					it.validate(ruleDefinition, scope);
 				} catch(AssertionError e) {
 					if(RunMode.ENFORCE == runMode) {
 						throw e;
