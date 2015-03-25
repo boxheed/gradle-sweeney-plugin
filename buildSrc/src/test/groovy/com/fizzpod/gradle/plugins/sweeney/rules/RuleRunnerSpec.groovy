@@ -19,4 +19,12 @@ class RuleRunnerSpec extends ProjectSpec {
 		then:
 			thrown(AssertionError)
 	}
+	
+	def 'unknown definition should throw an exception'() {
+		when:
+			def definitions = ["banana:tree:house"]
+			new RuleRunner(RunMode.ENFORCE).applyRules(definitions, project)
+		then:
+			thrown(IllegalArgumentException)
+	}
 }
