@@ -6,7 +6,7 @@ class RuleRunnerSpec extends ProjectSpec {
 
 	def 'the rule should pass'() {
 		when:
-			def definition = ["simple:abc:abc"]
+			def definition = ["equal:abc:abc"]
 			new RuleRunner(RunMode.ENFORCE).applyRules(project, definition)
 		then:
 			notThrown(AssertionError)
@@ -14,7 +14,7 @@ class RuleRunnerSpec extends ProjectSpec {
 	
 	def 'expect and value are different should fail'() {
 		when:
-			def definition = ["simple:abc:xyz"]
+			def definition = ["equal:abc:xyz"]
 			new RuleRunner(RunMode.ENFORCE).applyRules(project, definition)
 		then:
 			thrown(AssertionError)

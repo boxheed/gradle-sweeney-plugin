@@ -71,10 +71,10 @@ dependencies {
 sweeney {
 
 	
-	enforce type: "simple", name: "JDK 1.7", expect: "1.7", value: {System.getProperty('java.version').substring(0,3)}
+	enforce type: "equal", name: "JDK 1.7", expect: "1.7", value: {System.getProperty('java.version').substring(0,3)}
 
 
-	caution type: {"simple"}, name: {"JDK 1.7"}, expect: {"1.7"}, value: {System.getProperty('java.version')}
+	caution type: {"equal"}, name: {"JDK 1.7"}, expect: {"1.7"}, value: {System.getProperty('java.version')}
 	caution 'simple:1234:12345'
 	caution type: 'range', expect: ']1.7,)', value: {System.getProperty('java.version')}
 	caution type: 'jdk', expect: ']1.7,)'
