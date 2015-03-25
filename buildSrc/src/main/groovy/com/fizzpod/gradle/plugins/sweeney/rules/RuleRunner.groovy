@@ -26,7 +26,7 @@ public class RuleRunner {
 		}
 	}
 
-	void convertAndApplyRule(def ruleDefinition, def scope) {
+	private void convertAndApplyRule(def ruleDefinition, def scope) {
 		def convertedRuleDefinition = null;
 		new RuleDefinitionParserLoader().all().each { it ->
 			LOGGER.debug("Using parser: {}", it)
@@ -42,10 +42,12 @@ public class RuleRunner {
 		}
 	}
 
-	void applyRule(def ruleDefinition, def scope) {
+	private void applyRule(def ruleDefinition, def scope) {
+		boolean accepted = false;
 		ruleLoader.all().each { it ->
 			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), ruleDefinition);
 			if(it.accept(ruleDefinition, scope)) {
+				accepted = true;
 				LOGGER.info("Testing definition {} with rule {}", ruleDefinition, it.getType())
 				try {
 					it.validate(ruleDefinition, scope);
@@ -59,6 +61,9 @@ public class RuleRunner {
 			} else {
 				LOGGER.debug("Rule {} rejected definition {}", it.getType(), ruleDefinition);
 			}
+		}
+		if(!accepted) {
+			throw new IllegalArgumentException("Rule definition does not match any rule: " + ruleDefinition);
 		}
 	}
 }
