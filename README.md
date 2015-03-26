@@ -117,7 +117,7 @@ sweeney {
     enforce 'range:[1.0,):2.0'
 }
 ```
-Testing the JDK version is equal to 1.7:
+Testing the JDK version is version 1.7 or above:
 ```
 sweeney {
     enforce type: "range", expect: "[1.7,)", value: {System.getProperty('java.version')}
