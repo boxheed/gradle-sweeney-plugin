@@ -28,8 +28,9 @@ public class RuleRunner {
 
 	private void convertAndApplyRule(def ruleDefinition, def scope) {
 		def convertedRuleDefinition = null;
-		new RuleDefinitionParserLoader().all().each { it ->
-			LOGGER.debug("Using parser: {}", it)
+		LOGGER.debug("Using rules: {}", ruleDefinitionParserLoader.all())
+		ruleDefinitionParserLoader.all().each { it ->
+			LOGGER.info("Using parser: {}", it)
 			if(convertedRuleDefinition == null) {
 				convertedRuleDefinition = it.parse(ruleDefinition);
 			}
