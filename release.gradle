@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id 'nu.studer.plugindev' version '1.0.3'
+    //id 'nu.studer.plugindev' version '1.0.3'
 }
 
 
@@ -36,7 +36,7 @@ pluginBundle {
     }
   }
 }
-
+/*
 plugindev {
 	pluginId 'com.fizzpod.sweeney'
     pluginImplementationClass 'com.fizzpod.gradle.plugins.sweeney.SweeneyPlugin'
@@ -58,4 +58,4 @@ bintray {
     key = System.env.BINTRAY_KEY
     pkg.repo = 'gradle-plugins'
 }
-
+*/
