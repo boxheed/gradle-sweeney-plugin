@@ -23,8 +23,7 @@ before_script:
   - git remote set-url origin git@github.com:$REPO_NAME.git
   
 script:
-  - ./gradlew clean build
-  - set -e; if [ "$HEAD_BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew -b release.gradle clean build publishPluginToBintray; fi
+  - ./gradlew clean build; if [ "$HEAD_BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; fi
   
 after_script:
   - cp -R ./build/test-results/* ./shippable/testresults
