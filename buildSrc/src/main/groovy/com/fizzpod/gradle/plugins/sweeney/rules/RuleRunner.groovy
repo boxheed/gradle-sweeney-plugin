@@ -28,7 +28,7 @@ public class RuleRunner {
 
 	private void convertAndApplyRule(def ruleDefinition, def scope) {
 		def convertedRuleDefinition = null;
-		println("ruleDefinitionParserLoader.all()" + ruleDefinitionParserLoader.all())
+		LOGGER.debug("Using rules: {}", ruleDefinitionParserLoader.all())
 		ruleDefinitionParserLoader.all().each { it ->
 			LOGGER.info("Using parser: {}", it)
 			if(convertedRuleDefinition == null) {
