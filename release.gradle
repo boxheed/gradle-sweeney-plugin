@@ -6,15 +6,15 @@ buildscript {
 		}
 	}
 	dependencies {
-        classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.1'
-		classpath 'net.saliman:gradle-cobertura-plugin:2.2.4'
-		classpath 'com.fizzpod:gradle-extended-info-plugin:0.1.3'
+        classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.3'
+		classpath 'net.saliman:gradle-cobertura-plugin:2.2.8'
+		classpath 'com.fizzpod:gradle-extended-info-plugin:0.1.6'
 		classpath "com.gradle.publish:plugin-publish-plugin:0.9.0"
     }
 }
 
 plugins {
-    //id 'nu.studer.plugindev' version '1.0.3'
+    id 'nu.studer.plugindev' version '1.0.3'
 }
 
 
@@ -30,22 +30,22 @@ pluginBundle {
 
   plugins {
 
-    sweeneyPlugin {
+    plugin {
       id = 'com.fizzpod.sweeney'
       displayName = 'Gradle Sweeney plugin'
     }
   }
 }
-/*
+
 plugindev {
 	pluginId 'com.fizzpod.sweeney'
     pluginImplementationClass 'com.fizzpod.gradle.plugins.sweeney.SweeneyPlugin'
     pluginDescription 'Gradle plugin providing ability to enforce build rules.'
     pluginLicenses 'Apache-2.0'
     pluginTags 'gradle', 'plugin', 'enforce', 'rules', 'sweeney'
-    authorId System.env.BINTRAY_USER
-    authorName System.env.BINTRAY_AUTHOR
-    authorEmail System.env.BINTRAY_EMAIL
+    authorId bintray_user
+    authorName bintray_user
+    authorEmail bintray_mail
     projectUrl 'https://github.com/boxheed/gradle-sweeney-plugin'
 	projectIssuesUrl 'https://github.com/boxheed/gradle-sweeney-plugin/issues'
 	projectVcsUrl 'https://github.com/boxheed/gradle-sweeney-plugin.git'
@@ -54,8 +54,8 @@ plugindev {
 }
 
 bintray {
-    user = System.env.BINTRAY_USER
-    key = System.env.BINTRAY_KEY
+    user = bintray_user
+    key = bintray_api_key
     pkg.repo = 'gradle-plugins'
 }
-*/
+
