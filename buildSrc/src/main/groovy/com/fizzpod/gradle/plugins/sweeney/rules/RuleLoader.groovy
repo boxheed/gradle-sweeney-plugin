@@ -8,7 +8,8 @@ public class RuleLoader {
 		new JdkVersionRule(),
 		new GradleVersionRule(),
 		new PatternRule(),
-		new EqualRule()
+		new EqualRule(),
+		new BooleanRule()
 	]
 
 	private static ServiceLoader<Rule> ruleServiceLoader = ServiceLoader

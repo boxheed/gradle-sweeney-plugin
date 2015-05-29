@@ -90,6 +90,24 @@ sweeney {
 }
 ```
 
+## Boolean
+Tests that the result of the value is true, this is a specialisation of the equality rule, and provides a slightly shorter syntax
+
+```
+sweeney {
+    //map definition
+    enforce type: 'bool', value: {true}
+    //as a string, note the double colon (::) this is needed as the string parser expects the expected value to be present.
+    enforce 'bool::true'
+}
+```
+
+Testing the JDK version is equal to 1.7:
+```
+sweeney {
+    enforce type: "bool", value: {System.getProperty('java.version').substring(0,3) == '1.7'}
+}
+```
 ## Pattern
 Test using a Java regular expression as the `expect` value. Requires a type of `pattern`
 ```
