@@ -30,7 +30,7 @@ class JdkVersionRule implements Rule {
 		Map<String, Closure> newRuleDefinition = new HashMap<String, Closure>(ruleDefinition.getDefinition());
 		newRuleDefinition.put(TYPE_ATTRIBUTE, {VersionRangeRule.VERSION_RANGE_TYPE_VALUE})
 		newRuleDefinition.put(VALUE_ATTRIBUTE, {System.getProperty('java.version')})
-		newRuleDefinition.put("decription", {"JDK version rule"})
+		newRuleDefinition.put(DESCRIPTION_ATTRIBUTE, {"JDK version rule"})
 		return new RuleDefinition(newRuleDefinition);
 	}
 

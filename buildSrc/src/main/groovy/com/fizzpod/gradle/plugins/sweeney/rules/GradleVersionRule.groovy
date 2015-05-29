@@ -31,7 +31,7 @@ class GradleVersionRule implements Rule {
 		Map<String, Closure> newRuleDefinition = new HashMap<String, Closure>(ruleDefinition.getDefinition());
 		newRuleDefinition.put(TYPE_ATTRIBUTE, {VersionRangeRule.VERSION_RANGE_TYPE_VALUE})
 		newRuleDefinition.put(VALUE_ATTRIBUTE, {value})
-		newRuleDefinition.put("decription", {"Gradle version rule"})
+		newRuleDefinition.put(DESCRIPTION_ATTRIBUTE, {"Gradle version rule"})
 		return new RuleDefinition(newRuleDefinition);
 	}
 
