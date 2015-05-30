@@ -24,11 +24,16 @@ class SystemPropertyRule implements Rule {
 
 	@Override
 	public void validate(RuleDefinition ruleDefinition, def scope) {
+		String expect = ruleDefinition.getAttribute(EXPECT_ATTRIBUTE).call();
 		String systemPropertyKey = String.valueOf(ruleDefinition.getAttribute(VALUE_ATTRIBUTE).call()); 
-		String value = System.getProperty(systemPropertyKey);
-		def expect = ruleDefinition.getAttribute("expect").call();
 		LOGGER.info("Checking system property {} has value {}", systemPropertyKey, expect);
-		assert expect.equals(value), 'Validation failed for rule definition' + ruleDefinition
+		if(expect?.trim()) {
+			String value = System.getProperty(systemPropertyKey);
+			assert expect.equals(value), 'Validation failed for rule definition' + ruleDefinition
+		} else {
+			assert System.getProperties().containsKey(systemPropertyKey), 'Validation failed for rule definition' + ruleDefinition
+		}
+				
 	}
 
 	@Override
