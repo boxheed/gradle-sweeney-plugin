@@ -24,7 +24,7 @@ class SystemPropertyRule implements Rule {
 
 	@Override
 	public void validate(RuleDefinition ruleDefinition, def scope) {
-		String expect = ruleDefinition.getAttribute(EXPECT_ATTRIBUTE).call();
+		String expect = ruleDefinition.getAttribute(EXPECT_ATTRIBUTE)?.call();
 		String systemPropertyKey = String.valueOf(ruleDefinition.getAttribute(VALUE_ATTRIBUTE).call()); 
 		LOGGER.info("Checking system property {} has value {}", systemPropertyKey, expect);
 		if(expect?.trim()) {
