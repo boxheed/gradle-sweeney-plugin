@@ -43,4 +43,28 @@ class SystemPropertyRuleSpec extends ProjectSpec {
 			thrown(AssertionError)
 			accept == true;
 	}
+	
+	def 'property exists'() {
+		setup:
+			def stringDefinition = "sys::java.version"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
+		then:
+			notThrown(AssertionError)
+			accept == true;
+	}
+	
+	def 'property does not exist'() {
+		setup:
+			def stringDefinition = "sys::sys.prop.not.defined"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
+		then:
+			thrown(AssertionError)
+			accept == true;
+	}
 }
