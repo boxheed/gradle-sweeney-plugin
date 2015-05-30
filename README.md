@@ -13,7 +13,7 @@ buildscript {
 	}
 	dependencies {
 	    // sweeney dependency
-		classpath 'com.fizzpod:gradle-sweeney-plugin:0.1+'
+		classpath 'com.fizzpod:gradle-sweeney-plugin:1.0+'
     }
 }
 
@@ -139,6 +139,27 @@ Testing the JDK version is version 1.7 or above:
 ```
 sweeney {
     enforce type: "range", expect: "[1.7,)", value: {System.getProperty('java.version')}
+}
+```
+
+## System Property
+This rule tests for the existence and value of a specified system property. The key for the system property is specified in the value position and the expected value is the value of the key.
+```
+sweeney {
+    // tests whether the jdk is version 1.7.0_79
+    enforce type: 'sys', expect: '1.7.0_79', value: 'java.version'
+    // string version
+    enforce 'sys:1.7.0_79:java.version'
+}
+```
+
+If you just wish to test for the existence of a system property leave the expected value as undefined as in the following example.
+```
+sweeney {
+    // tests whether the java.version system property is defined.
+    enforce type: 'sys', value: 'java.version'
+    // string version, note the double colon '::' this is required for the parser.
+    enforce 'sys::java.version'
 }
 ```
 

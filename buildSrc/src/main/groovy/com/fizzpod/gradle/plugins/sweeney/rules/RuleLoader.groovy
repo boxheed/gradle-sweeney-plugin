@@ -9,7 +9,8 @@ public class RuleLoader {
 		new GradleVersionRule(),
 		new PatternRule(),
 		new EqualRule(),
-		new BooleanRule()
+		new BooleanRule(),
+		new SystemPropertyRule()
 	]
 
 	private static ServiceLoader<Rule> ruleServiceLoader = ServiceLoader
