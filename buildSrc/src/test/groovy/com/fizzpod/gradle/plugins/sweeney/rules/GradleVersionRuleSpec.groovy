@@ -17,10 +17,10 @@ class GradleVersionRuleSpec extends ProjectSpec {
 			notThrown(AssertionError)
 			accept == true;
 	}
-	
-	def 'gradle rule should not allow gradle versions less than and equal to 2.3'() {
+
+	def 'gradle rule should not allow gradle versions less than and equal to 2.6'() {
 		setup:
-			def stringDefinition = "gradle:]2.3,)"
+			def stringDefinition = "gradle:]2.6,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = gradleVersionRule.accept(definition, project)
@@ -29,5 +29,5 @@ class GradleVersionRuleSpec extends ProjectSpec {
 			thrown(AssertionError)
 			accept == true;
 	}
-	
+
 }
