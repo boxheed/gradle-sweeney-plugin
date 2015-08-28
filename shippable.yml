@@ -8,7 +8,7 @@ jdk:
 build_image: shippableimages/ubuntu1404_java
 
 before_install:
-  
+
 # Activate jdk
 before_script:
   - if [[ $SHIPPABLE_JDK_VERSION == "openjdk7" ]] ; then export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"; export PATH="$PATH:/usr/lib/jvm/java-7-openjdk-amd64/bin"; export java_path="/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java"; fi
@@ -22,7 +22,8 @@ before_script:
   - mkdir -p shippable/artifacts
   - git remote set-url origin git@github.com:$REPO_NAME.git
   - mkdir $HOME/.gradle; printenv | grep GRADLE_PROP | cut -d'=' -f 2- >> $HOME/.gradle/gradle.properties
-  
+  - printenv | grep GRADLE_PROP
+
 script:
   - ./gradlew clean build; if [ "$HEAD_BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew -b release.gradle clean build publishPlugins publishPluginToBintray; fi
 
