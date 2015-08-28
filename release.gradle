@@ -6,7 +6,7 @@ buildscript {
 		}
 	}
 	dependencies {
-        classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.3'
+    classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.3'
 		classpath 'net.saliman:gradle-cobertura-plugin:2.2.8'
 		classpath 'com.fizzpod:gradle-extended-info-plugin:0.1.6'
 		classpath "com.gradle.publish:plugin-publish-plugin:0.9.0"
@@ -14,12 +14,13 @@ buildscript {
 }
 
 plugins {
-    id 'nu.studer.plugindev' version '1.0.3'
+    id "com.jfrog.bintray" version "1.3.1"
 }
 
 
-apply plugin: 'com.gradle.plugin-publish'
 apply from: 'build.gradle'
+apply plugin: 'com.gradle.plugin-publish'
+apply plugin: 'maven-publish'
 
 pluginBundle {
   website = 'https://github.com/boxheed/gradle-sweeney-plugin'
@@ -37,25 +38,71 @@ pluginBundle {
   }
 }
 
+
+
+
+
+
+bintray {
+	user = bintray_user
+	key = bintray_key
+	dryRun = false //Whether to run this as dry-run, without deploying
+	publish = true //If version should be auto published after an upload
+	publications = ['mavenJava']
+	pkg {
+		websiteUrl = 'https://github.com/boxheed/' + rootProject.name
+		issueTrackerUrl = 'https://github.com/boxheed/' + rootProject.name + '/issues'
+    vcsUrl = 'https://github.com/boxheed/' + rootProject.name + '.git'
+		labels = ['gradle', 'plugin', 'enforce', 'rules', 'sweeney']
+		repo = 'gradle-plugins'
+		name = rootProject.name
+		licenses = ['Apache-2.0']
+		publicDownloadNumbers = true
+	}
+}
+
+publishing {
+    publications {
+        main(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 plugindev {
 	pluginId 'com.fizzpod.sweeney'
     pluginImplementationClass 'com.fizzpod.gradle.plugins.sweeney.SweeneyPlugin'
     pluginDescription 'Gradle plugin providing ability to enforce build rules.'
     pluginLicenses 'Apache-2.0'
     pluginTags 'gradle', 'plugin', 'enforce', 'rules', 'sweeney'
-    authorId bintray_user
-    authorName bintray_user
-    authorEmail bintray_mail
+    authorId "abc"
+    authorName "def"
+    authorEmail "hij"
     projectUrl 'https://github.com/boxheed/gradle-sweeney-plugin'
 	projectIssuesUrl 'https://github.com/boxheed/gradle-sweeney-plugin/issues'
 	projectVcsUrl 'https://github.com/boxheed/gradle-sweeney-plugin.git'
     projectInceptionYear '2015'
     done() // do not omit this
 }
-
-bintray {
-    user = bintray_user
-    key = bintray_api_key
-    pkg.repo = 'gradle-plugins'
-}
-
+*/

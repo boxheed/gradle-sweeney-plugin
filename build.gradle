@@ -4,9 +4,9 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-        classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.3'
-		classpath 'net.saliman:gradle-cobertura-plugin:2.2.8'
-		classpath 'com.fizzpod:gradle-extended-info-plugin:0.1.6'
+    	classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.3'
+			classpath 'net.saliman:gradle-cobertura-plugin:2.2.8'
+			classpath 'com.fizzpod:gradle-extended-info-plugin:0.1.6'
     }
 }
 
@@ -78,10 +78,25 @@ artifacts {
 }
 
 cobertura {
-    coverageFormats = ['html', 'xml']				
-    coverageIgnoreTrivial = true					
-    coverageIgnores = ['org.slf4j.Logger.*']			
-    coverageReportDir = new File("$buildDir/reports/cobertura")	
+  coverageFormats = ['html', 'xml']
+  coverageIgnoreTrivial = true
+  coverageIgnores = ['org.slf4j.Logger.*']
+  coverageReportDir = new File("$buildDir/reports/cobertura")
 }
 
 test.finalizedBy(project.tasks.cobertura)
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
