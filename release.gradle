@@ -45,7 +45,7 @@ pluginBundle {
 
 bintray {
 	user = bintray_user
-	key = bintray_key
+	key = bintray_api_key
 	dryRun = false //Whether to run this as dry-run, without deploying
 	publish = true //If version should be auto published after an upload
 	publications = ['mavenJava']

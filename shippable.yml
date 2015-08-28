@@ -22,7 +22,6 @@ before_script:
   - mkdir -p shippable/artifacts
   - git remote set-url origin git@github.com:$REPO_NAME.git
   - mkdir $HOME/.gradle; printenv | grep GRADLE_PROP | cut -d'=' -f 2- >> $HOME/.gradle/gradle.properties
-  - printenv | grep GRADLE_PROP
 
 script:
   - ./gradlew clean build; if [ "$HEAD_BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew -b release.gradle clean build publishPlugins publishPluginToBintray; fi
@@ -31,7 +30,7 @@ after_script:
   - cp -R ./build/test-results/* ./shippable/testresults
   - cp -R ./build/reports/cobertura/*.xml ./shippable/codecoverage
   - cp -R ./build/libs/* ./shippable/artifacts
-  
+
 archive: true
 
 #environment
