@@ -17,7 +17,7 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			notThrown(AssertionError)
 			accept == true;
 	}
-	
+
 	def 'jdk rule should not allow jdks less than and equal to 1.7'() {
 		setup:
 			def stringDefinition = "jdk:]1.7,)"
@@ -29,5 +29,5 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			thrown(AssertionError)
 			accept == true;
 	}
-	
+
 }
