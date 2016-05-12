@@ -185,6 +185,24 @@ sweeney {
 }
 ```
 
+# Failing fast
+If for example you want your some or all of your rules to run immediately you can provide a call to `validate`
+after the definition of the rules, for example to test the Java and Gradle versions you may run define the following rules and then invoke the validate method:
+
+```
+sweeney {
+    // tests whether gradle is 2.0 or above
+    enforce 'gradle:[2.0,)'
+    // tests whether the jdk is version 1.7 or above
+    enforce 'jdk:[1.7,)'
+    //run the rules 
+    validate()
+    //this rule is run in the normal phase
+    enforce 'pattern:abc:def'
+}
+
+Note that the rules after the validate will run in the normal phase. The call to `validate` does not mark the rules as already run so will be run a second time in the normal phase of the gradle lifecycle.
+
 # Rule scopes
 The plugin listens for the afterEvaluate on the project for running the defined rules, it is envisaged that additional hooks into the different lifecycle phases will be added at a later date.
 
