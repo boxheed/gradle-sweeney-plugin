@@ -21,7 +21,7 @@ build:
     - git remote set-url origin git@github.com:$REPO_NAME.git
     - echo `printenv | cut -d'=' -f 1-2`
     - mkdir $HOME/.gradle; printenv | grep GRADLE_PROP | cut -d'=' -f 2- >> $HOME/.gradle/gradle.properties
-    - `cat $HOME/.gradle/gradle.properties | cut -d'=' -f 1`
+    - echo `cat $HOME/.gradle/gradle.properties | cut -d'=' -f 1`
     - ./gradlew clean build; if [ "$BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew clean build publishPlugins bintrayUpload; fi
 
 
