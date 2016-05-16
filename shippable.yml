@@ -19,9 +19,9 @@ build:
     - mkdir -p shippable/codecoverage
     - mkdir -p shippable/artifacts
     - git remote set-url origin git@github.com:$REPO_NAME.git
-    - mkdir $HOME/.gradle; printenv | grep GRADLE_PROP | cut -d'=' -f 2- >> $HOME/.gradle/gradle.properties
+    - mkdir $HOME/.gradle; printenv | grep GRADLE_PROP | cut -d'=' -f 2- > $HOME/.gradle/gradle.properties
     - ./gradlew clean build; if [ "$BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew clean build publishPlugins bintrayUpload; fi
-    
+
 
   on_success:
     - cp -R ./build/test-results/* ./shippable/testresults
