@@ -45,7 +45,7 @@ Sweeney has two configuration mechanisms for defining the rules, either via a ma
 This configuration most closely resembles the internal representation of the rule definitions and offers the greatest flexibility.
 ```
 sweeney {
-    enforce type: {'equal'}, expect: {'abc'}, value: {'def}
+    enforce type: {'equal'}, expect: {'abc'}, value: {'def'}
 }
 ```
 ### Map based definition using Strings
@@ -203,7 +203,8 @@ sweeney {
 
 Note that the rules after the validate will run in the normal phase. The call to `validate` does not mark the rules as already run so will be run a second time in the normal phase of the gradle lifecycle.
 
-# Rule scopes
+# Rule evaluation phases
+It's possible to invoke rules in different phases of the gradle build. 
 The plugin listens for the afterEvaluate on the project for running the defined rules, it is envisaged that additional hooks into the different lifecycle phases will be added at a later date.
 
 # Extending with your own rules
