@@ -9,8 +9,10 @@ class JdkVersionRule implements Rule {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JdkVersionRule); 
 	
 	public static final String JDK_TYPE_VALUE = "jdk"
+	private static final String DEFAULT_MESSAGE = 'Java version $version is not within specification: $ruleDefinition'
 
 	private VersionRangeRule versionRangeRule = new VersionRangeRule();
+
 	
 	@Override
 	public String getType() {
@@ -28,6 +30,9 @@ class JdkVersionRule implements Rule {
 	
 	private RuleDefinition convertForVersionRangeRule(RuleDefinition ruleDefinition) {
 		Map<String, Closure> newRuleDefinition = new HashMap<String, Closure>(ruleDefinition.getDefinition());
+		if(!newRuleDefinition.containsKey(MSG_ATTRIBUTE)) {
+			newRuleDefinition.put(MSG_ATTRIBUTE, {DEFAULT_MESSAGE})
+		}
 		newRuleDefinition.put(TYPE_ATTRIBUTE, {VersionRangeRule.VERSION_RANGE_TYPE_VALUE})
 		newRuleDefinition.put(VALUE_ATTRIBUTE, {System.getProperty('java.version')})
 		newRuleDefinition.put(DESCRIPTION_ATTRIBUTE, {"JDK version rule"})

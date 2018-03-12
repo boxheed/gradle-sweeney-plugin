@@ -1,70 +1,67 @@
 buildscript {
-	repositories {
-		mavenLocal()
-		jcenter()
-		maven {
+  repositories {
+    mavenLocal()
+    jcenter()
+    maven {
       url "https://plugins.gradle.org/m2/"
     }
-		maven {
-			url "https://dl.bintray.com/boxhead/maven/"
-		}
-	}
-	dependencies {
-		classpath ('com.fizzpod:gradle-plugin-opinion:3.1.0') {
-			exclude group: 'com.fizzpod', module: 'gradle-sweeney-plugin'
-		}
-	}
+  }
+  dependencies {
+    classpath ('com.fizzpod:gradle-plugin-opinion:6.0.0') {
+      exclude group: 'com.fizzpod', module: 'gradle-sweeney-plugin'
+    }
+  }
 }
 
 apply plugin: 'com.fizzpod.pater-build'
 apply from: 'buildSrc/build.gradle'
 
 sourceSets {
-    main {
-        java {
-            srcDir 'buildSrc/src/main/java'
-        }
-        resources {
-            srcDir 'buildSrc/src/main/resources'
-        }
-		groovy {
-		    srcDir 'buildSrc/src/main/groovy'
-		}
-	}
-	test {
-        java {
-            srcDir 'buildSrc/src/test/java'
-        }
-        resources {
-            srcDir 'buildSrc/src/test/resources'
-        }
-		groovy {
-		    srcDir 'buildSrc/src/test/groovy'
-		}
-	}
+  main {
+    java {
+      srcDir 'buildSrc/src/main/java'
+    }
+    resources {
+      srcDir 'buildSrc/src/main/resources'
+    }
+    groovy {
+      srcDir 'buildSrc/src/main/groovy'
+    }
+  }
+  test {
+    java {
+      srcDir 'buildSrc/src/test/java'
+    }
+    resources {
+      srcDir 'buildSrc/src/test/resources'
+    }
+    groovy {
+      srcDir 'buildSrc/src/test/groovy'
+    }
+  }
 }
 
 dependencies {
-	compile gradleApi()
-	compile localGroovy()
+  compile gradleApi()
+  compile localGroovy()
 }
 
 bintray {
-	dryRun = false
-	publish = true
-	pkg {
-		labels = ['gradle', 'plugin', 'enforce', 'rules', 'sweeney']
-	}
+  dryRun = false
+  publish = true
+  pkg {
+    labels = ['gradle', 'plugin', 'enforce', 'rules', 'sweeney']
+  }
 }
 
 pluginBundle {
 
-	description = 'Gradle plugin providing ability to enforce build rules.'
+  description = 'Gradle plugin providing ability to enforce build rules.'
   tags = ['gradle', 'plugin', 'enforce', 'rules', 'sweeney']
 
   plugins {
 
-		plugin {
+    plugin {
       id = 'com.fizzpod.sweeney'
       displayName = 'Gradle Sweeney plugin'
     }

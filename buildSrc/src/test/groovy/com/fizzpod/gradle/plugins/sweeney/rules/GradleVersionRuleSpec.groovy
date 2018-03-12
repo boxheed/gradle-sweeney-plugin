@@ -18,9 +18,9 @@ class GradleVersionRuleSpec extends ProjectSpec {
 			accept == true;
 	}
 
-	def 'gradle rule should not allow gradle versions less than and equal to 2.14.1'() {
+	def 'gradle rule should not allow gradle versions less than and equal to 4.7'() {
 		setup:
-			def stringDefinition = "gradle:]2.14.1,)"
+			def stringDefinition = "gradle:]4.7,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = gradleVersionRule.accept(definition, project)

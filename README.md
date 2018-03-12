@@ -39,35 +39,37 @@ This defines which rule is targeted for the definition.
 This defines the expected value for the rule to test against.
 ## Value
 The value to be tested.
+## Message (msg)
+An optional message that will be output when the assertion fails, uses a groovy template for fomatting
 ## Definition specs
 Sweeney has two configuration mechanisms for defining the rules, either via a map or a string, with some useful flexibility. At the end of the day the definition will end up in a map of String keys to Closure values.
 ### Map based definition using closures
 This configuration most closely resembles the internal representation of the rule definitions and offers the greatest flexibility.
 ```
 sweeney {
-    enforce type: {'equal'}, expect: {'abc'}, value: {'def'}
+    enforce type: {'equal'}, expect: {'abc'}, value: {'def'}, msg: {'Assertion of rule $type failed, expected $expect but got $value'}
 }
 ```
 ### Map based definition using Strings
 To shorten the definition down it is possible to just define each part as a string, the definition parser will convert the strings into closures.
 ```
 sweeney {
-    enforce type: 'equal', expect: 'abc', value: 'def'
+    enforce type: 'equal', expect: 'abc', value: 'def', msg: 'Assertion of rule $type failed, expected $expect but got $value'
 }
 ```
 
 ### Map based definition using mixture
-It s also possible to mix the previous two definitions in order to give greater flexibility
+It is also possible to mix the previous two definitions in order to give greater flexibility
 ```
 sweeney {
-    enforce type: 'equal', expect: 'abc', value: {'def'}
+    enforce type: 'equal', expect: 'abc', value: {'def'}, msg: {'Assertion of rule $type failed, expected $expect but got $value'}
 }
 ```
 ### String based definition
 A shorthand string based parser is also available to construct rules. The string is constructed as `type:expect:value` where 
 ```
 sweeney {
-    enforce 'equal:abc:def'
+    enforce 'equal:abc:def:Assertion of rule $type failed, expected $expect but got $value'
 }
 ```
 

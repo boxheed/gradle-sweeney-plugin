@@ -20,13 +20,13 @@ build:
     - mkdir -p shippable/artifacts
     - git remote set-url origin git@github.com:$REPO_NAME.git
     - mkdir $HOME/.gradle; printenv | grep GRADLE_PROP | cut -d'=' -f 2- >> $HOME/.gradle/gradle.properties
-    - ./gradlew clean build -Dscan; if [ "$BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew clean build publishPlugins bintrayUpload; fi
+    - ./gradlew clean build --scan; if [ "$BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; git push --tags; ./gradlew clean build publishPlugins bintrayUpload; fi
 
 
   on_success:
     - bash <(curl -s https://codecov.io/bash)
     - cp -R ./build/test-results/* ./shippable/testresults
-    - cp -R ./build/reports/cobertura/*.xml ./shippable/codecoverage
+    - cp -R ./build/reports/jacoco/test/*.xml ./shippable/codecoverage
     - cp -R ./build/libs/* ./shippable/artifacts
 
 #environment

@@ -27,7 +27,7 @@ class BooleanRule implements Rule {
 		boolean value = Boolean.valueOf(ruleDefinition.getAttribute(VALUE_ATTRIBUTE).call()); 
 	
 		LOGGER.info("Checking value {} is true", value);
-		assert value, 'Validation failed for rule definition' + ruleDefinition
+		assert value, Rule.DEFAULT_MESSAGE.format(ruleDefinition);
 	}
 
 	@Override

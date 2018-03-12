@@ -29,9 +29,9 @@ class SystemPropertyRule implements Rule {
 		LOGGER.info("Checking system property {} has value {}", systemPropertyKey, expect);
 		if(expect?.trim()) {
 			String value = System.getProperty(systemPropertyKey);
-			assert expect.equals(value), 'Validation failed for rule definition' + ruleDefinition
+			assert expect.equals(value), Rule.DEFAULT_MESSAGE.format(ruleDefinition);
 		} else {
-			assert System.getProperties().containsKey(systemPropertyKey), 'Validation failed for rule definition' + ruleDefinition
+			assert System.getProperties().containsKey(systemPropertyKey), Rule.DEFAULT_MESSAGE.format(ruleDefinition);
 		}
 				
 	}
