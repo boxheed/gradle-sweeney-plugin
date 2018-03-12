@@ -28,7 +28,7 @@ class PatternRule implements Rule {
 		String expect = ruleDefinition.getAttribute("expect").call();
 		
 		LOGGER.info("Checking value {} with expected {}", value, expect);
-		assert value.matches(expect), 'Validation failed for rule definition' + ruleDefinition
+		assert value.matches(expect), Rule.DEFAULT_MESSAGE.format(ruleDefinition);
 	}
 
 	@Override

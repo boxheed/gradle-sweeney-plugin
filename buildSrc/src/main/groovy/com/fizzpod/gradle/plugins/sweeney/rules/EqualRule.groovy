@@ -27,7 +27,7 @@ class EqualRule implements Rule {
 		def value = ruleDefinition.getAttribute("value").call(); 
 		def expect = ruleDefinition.getAttribute("expect").call();
 		LOGGER.info("Checking value {} with expected {}", value, expect);
-		assert value.equals(expect), 'Validation failed for rule definition' + ruleDefinition
+		assert value.equals(expect), Rule.DEFAULT_MESSAGE.format(ruleDefinition);
 	}
 
 	@Override

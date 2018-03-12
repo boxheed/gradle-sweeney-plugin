@@ -11,6 +11,7 @@ class GradleVersionRule implements Rule {
 	
 	public static final String GRADLE_TYPE_VALUE = "gradle"
 
+	private static final String DEFAULT_MESSAGE = 'Gradle version $version is not within specification: $ruleDefinition'
 	private VersionRangeRule versionRangeRule = new VersionRangeRule();
 	
 	@Override
@@ -29,6 +30,9 @@ class GradleVersionRule implements Rule {
 	
 	private RuleDefinition convertForVersionRangeRule(RuleDefinition ruleDefinition, String value) {
 		Map<String, Closure> newRuleDefinition = new HashMap<String, Closure>(ruleDefinition.getDefinition());
+		if(!newRuleDefinition.containsKey(MSG_ATTRIBUTE)) {
+			newRuleDefinition.put(MSG_ATTRIBUTE, {DEFAULT_MESSAGE})
+		}
 		newRuleDefinition.put(TYPE_ATTRIBUTE, {VersionRangeRule.VERSION_RANGE_TYPE_VALUE})
 		newRuleDefinition.put(VALUE_ATTRIBUTE, {value})
 		newRuleDefinition.put(DESCRIPTION_ATTRIBUTE, {"Gradle version rule"})

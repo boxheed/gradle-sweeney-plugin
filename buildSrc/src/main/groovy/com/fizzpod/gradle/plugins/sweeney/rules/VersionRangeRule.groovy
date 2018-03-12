@@ -114,11 +114,12 @@ class VersionRangeRule implements Rule {
 	@Override
 	public void validate(RuleDefinition ruleDefinition, def scope) {
 		LOGGER.info("Validating {}", ruleDefinition)
+		RuleMessageFormatter formatter = new RuleMessageFormatter('Version $version is not within specification: $ruleDefinition')
 		String expect = getExpect(ruleDefinition);
 		Version version = getVersion(ruleDefinition);
 		LowerVersion lowerVersion = getLowerVersion(expect);
 		UpperVersion upperVersion = getUpperVersion(expect);
-		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), "Version $version is not within specification: $ruleDefinition" 
+		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), formatter.format(ruleDefinition, ["version":version]) 
 	}
 
 	private String getExpect(RuleDefinition ruleDefinition) {
@@ -128,6 +129,7 @@ class VersionRangeRule implements Rule {
 	private Version getVersion(RuleDefinition ruleDefinition) {
 		String value = ruleDefinition.getAttribute(VALUE_ATTRIBUTE).call();
 		Matcher matcher = VERSION_EXTRACT_PATTERN.matcher(value)
+
 		assert matcher.matches(), "Value $value does not contain a valid version number"
 		value = matcher.group(1);
 		return new Version(value);
@@ -225,7 +227,7 @@ class VersionRangeRule implements Rule {
 		}
 
 		public Version(String version) {
-			assert version != null, "Version can not be null"
+			assert version != null, "Version cannot be null"
 			assert version.matches("[0-9]+(\\.[0-9]+)*"), "Invalid version format: $version"
 			this.version = version;
 		}
