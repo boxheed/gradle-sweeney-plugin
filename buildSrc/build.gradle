@@ -4,7 +4,7 @@ repositories {
 
 dependencies {
 
-	testCompile('com.netflix.nebula:nebula-test:4.2.2') {
+	testCompile('com.netflix.nebula:nebula-test:7.1.0') {
         exclude group: 'org.codehaus.groovy'
   }
 }
