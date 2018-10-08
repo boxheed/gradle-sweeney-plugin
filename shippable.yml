@@ -5,7 +5,7 @@ jdk:
 
 build:
   ci:
-    - source <(curl -s https://raw.githubusercontent.com/boxheed/shippable-scripts/master/java-build-ci-setup)
+    - source <(curl -s https://raw.githubusercontent.com/boxheed/shippable-scripts/1.2/java-build-ci-setup)
     - ./gradlew clean build
     - if [ "$BRANCH" == "master" ]; then ./gradlew clean verifyRelease createRelease; fi
     - if [ "$BRANCH" == "master" ]; then ./gradlew clean build; fi
@@ -14,11 +14,11 @@ build:
     - if [ "$BRANCH" == "master" ]; then ./gradlew publishPlugins; fi
 
   on_success:
-    - source <(curl -s https://raw.githubusercontent.com/boxheed/shippable-scripts/1.1/java-on-success)
+    - source <(curl -s https://raw.githubusercontent.com/boxheed/shippable-scripts/1.2/java-on-success)
     - bash <(curl -s https://codecov.io/bash)
 
   on_failure:
-    - source <(curl -s https://raw.githubusercontent.com/boxheed/shippable-scripts/1.1/java-on-success)
+    - source <(curl -s https://raw.githubusercontent.com/boxheed/shippable-scripts/1.2/java-on-success)
 
 env:
   global:
