@@ -18,9 +18,9 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			accept == true;
 	}
 
-	def 'jdk rule should not allow jdks less than and equal to 1.7'() {
+	def 'jdk rule should not allow jdks less than and equal to 1.8'() {
 		setup:
-			def stringDefinition = "jdk:]1.7,)"
+			def stringDefinition = "jdk:]1.8,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = jdkVersionRule.accept(definition, project)
