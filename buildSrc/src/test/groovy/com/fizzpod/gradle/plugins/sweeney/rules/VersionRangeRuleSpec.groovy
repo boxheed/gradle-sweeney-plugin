@@ -188,4 +188,15 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			accept == true;
 	}
 	
+	def 'minor versions .10 should be higher than .1'() {
+		setup:
+			def stringDefinition = "range:(,2.10[:2.1"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def accept = rule.accept(definition, project)
+			rule.validate(definition, project);
+		then:
+			notThrown(AssertionError)
+			accept == true;
+	}
 }
