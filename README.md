@@ -1,4 +1,5 @@
-[![Build Status](https://api.shippable.com/projects/550fe54f5ab6cc1352a7dd4c/badge?branchName=master)](https://app.shippable.com/projects/550fe54f5ab6cc1352a7dd4c/builds/latest)
+[![CircleCI](https://circleci.com/gh/boxheed/gradle-sweeney-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/boxheed/gradle-sweeney-plugin/tree/master)
+
 # Gradle Sweeney Plugin
 A Gradle plugin with the capability to enforce rules against the current project/environment like the Maven enforcer plugin.
 
