@@ -9,7 +9,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath ('com.fizzpod:gradle-plugin-opinion:11.3.0') {
+    classpath ('com.fizzpod:gradle-plugin-opinion:12.1.0') {
       exclude group: 'com.fizzpod', module: 'gradle-sweeney-plugin'
     }
   }
@@ -51,7 +51,7 @@ dependencies {
 pluginBundle {
 
   description = 'Gradle plugin providing ability to enforce build rules.'
-  tags = ['gradle', 'plugin', 'enforce', 'rules', 'sweeney']
+  tags = ['enforce', 'rules', 'sweeney']
 
   plugins {
 
