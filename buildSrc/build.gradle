@@ -3,7 +3,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation('com.netflix.nebula:nebula-test:10.5.0') {
+	testImplementation('com.netflix.nebula:nebula-test:10.6.0') {
         exclude group: 'org.codehaus.groovy'
   }
 }
