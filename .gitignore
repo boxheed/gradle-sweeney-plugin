@@ -6,3 +6,6 @@ bin
 .settings
 .vagrant/
 .vscode/
+.LCKbuild.gradle~
+.osv-scanner
+.git-semver
