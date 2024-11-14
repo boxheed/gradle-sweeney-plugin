@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory
  * http://ant.apache.org/ivy/history/trunk/settings/version-matchers.html 
  *
  */
-class VersionRangeRule implements Rule {
+class VersionRangeRule extends AbstractRule implements Rule {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(VersionRangeRule)
 

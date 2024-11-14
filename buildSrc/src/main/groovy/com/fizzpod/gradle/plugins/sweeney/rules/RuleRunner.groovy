@@ -7,6 +7,8 @@ public class RuleRunner {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RuleRunner);
 
+	private RuleDefinitionProcessor processor = new RuleDefinitionProcessor()
+
 	private RuleLoader ruleLoader = new RuleLoader();
 
 	private RuleDefinitionParserLoader ruleDefinitionParserLoader = new RuleDefinitionParserLoader();
@@ -17,54 +19,30 @@ public class RuleRunner {
 		runMode = mode;
 	}
 
+	@Deprecated
+	public void applyRules(def ruleSpecifications, def scope) {
+		ruleSpecifications.each { spec ->
+			def definition = processor.process(spec, scope)
+			run(definition.definition, definition.rule, scope)
+		}
+	}
 
-	public void applyRules(def ruleDefinitions, def scope) {
-
+	public void runRules(def ruleDefinitions, def scope) {
 		ruleDefinitions.each { ruleDefinition ->
-			LOGGER.debug("Applying rule: {}", ruleDefinition);
-			convertAndApplyRule(ruleDefinition, scope);
+			run(ruleDefinition.definition, ruleDefinition.rule, scope);
 		}
 	}
 
-	private void convertAndApplyRule(def ruleDefinition, def scope) {
-		def convertedRuleDefinition = null;
-		LOGGER.debug("Using rules: {}", ruleDefinitionParserLoader.all())
-		ruleDefinitionParserLoader.all().each { it ->
-			LOGGER.info("Using parser: {}", it)
-			if(convertedRuleDefinition == null) {
-				convertedRuleDefinition = it.parse(ruleDefinition);
-			}
-		}
-		if(convertedRuleDefinition != null) {
-			applyRule(convertedRuleDefinition, scope);
-		} else {
-			LOGGER.error("Unable to parse rule: {}", ruleDefinition);
-			throw new IllegalArgumentException("Unable to parse rule: " + ruleDefinition);
-		}
-	}
-
-	private void applyRule(def ruleDefinition, def scope) {
-		boolean accepted = false;
-		ruleLoader.all().each { it ->
-			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), ruleDefinition);
-			if(it.accept(ruleDefinition, scope)) {
-				accepted = true;
-				LOGGER.info("Testing definition {} with rule {}", ruleDefinition, it.getType())
-				try {
-					it.validate(ruleDefinition, scope);
-				} catch(AssertionError e) {
-					if(RunMode.ENFORCE == runMode) {
-						throw e;
-					} else {
-						LOGGER.warn("Warning: {}", e.getMessage());
-					}
-				}
+	public void run(def definition, def rule, def scope) {
+		try {
+			LOGGER.debug("Applying rule: {}", definition)
+			rule.validate(definition, scope)
+		} catch(AssertionError e) {
+			if(RunMode.ENFORCE == runMode) {
+				throw e;
 			} else {
-				LOGGER.debug("Rule {} rejected definition {}", it.getType(), ruleDefinition);
+				LOGGER.warn("Warning: {}", e.getMessage());
 			}
-		}
-		if(!accepted) {
-			throw new IllegalArgumentException("Rule definition does not match any rule: " + ruleDefinition);
 		}
 	}
 }

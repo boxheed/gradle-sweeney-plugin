@@ -9,13 +9,14 @@ A Gradle plugin with the capability to enforce rules against the current project
 Import the sweeney gradle plugin
 ```
 buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-	    // sweeney dependency
-		classpath 'com.fizzpod:gradle-sweeney-plugin:1.0+'
+  repositories {
+    maven {
+      url = uri("https://plugins.gradle.org/m2/")
     }
+  }
+  dependencies {
+    classpath("com.fizzpod:gradle-sweeney-plugin:5.0.4")
+  }
 }
 
 apply plugin: 'com.fizzpod.sweeney'
@@ -42,20 +43,22 @@ This defines the expected value for the rule to test against.
 The value to be tested.
 ## Message (msg)
 An optional message that will be output when the assertion fails, uses a groovy template for fomatting
+## When
+This controls when to run the rule. For most rules it waits until the project has been initialised before running the rule. This can be modified by setting the `when` to the value `now` at which point it evaluates the rul immediately. However the JDK and Gradle version rules change that behaviour and by default are evaluated immediately which can be changed by setting the `when` to any other value e.g. `later`.
 ## Definition specs
 Sweeney has two configuration mechanisms for defining the rules, either via a map or a string, with some useful flexibility. At the end of the day the definition will end up in a map of String keys to Closure values.
 ### Map based definition using closures
 This configuration most closely resembles the internal representation of the rule definitions and offers the greatest flexibility.
 ```
 sweeney {
-    enforce type: {'equal'}, expect: {'abc'}, value: {'def'}, msg: {'Assertion of rule $type failed, expected $expect but got $value'}
+    enforce type: {'equal'}, expect: {'abc'}, value: {'def'}, msg: {'Assertion of rule $type failed, expected $expect but got $value', when: {'now'}}
 }
 ```
 ### Map based definition using Strings
 To shorten the definition down it is possible to just define each part as a string, the definition parser will convert the strings into closures.
 ```
 sweeney {
-    enforce type: 'equal', expect: 'abc', value: 'def', msg: 'Assertion of rule $type failed, expected $expect but got $value'
+    enforce type: 'equal', expect: 'abc', value: 'def', msg: 'Assertion of rule $type failed, expected $expect but got $value', when: 'now'
 }
 ```
 
@@ -63,14 +66,14 @@ sweeney {
 It is also possible to mix the previous two definitions in order to give greater flexibility
 ```
 sweeney {
-    enforce type: 'equal', expect: 'abc', value: {'def'}, msg: {'Assertion of rule $type failed, expected $expect but got $value'}
+    enforce type: 'equal', expect: 'abc', value: {'def'}, msg: {'Assertion of rule $type failed, expected $expect but got $value', when: {'now'}
 }
 ```
 ### String based definition
 A shorthand string based parser is also available to construct rules. The string is constructed as `type:expect:value` where 
 ```
 sweeney {
-    enforce 'equal:abc:def:Assertion of rule $type failed, expected $expect but got $value'
+    enforce 'equal:abc:def:Assertion of rule $type failed, expected $expect but got $value:now'
 }
 ```
 
@@ -86,10 +89,10 @@ sweeney {
     enforce 'equal:abc:def'
 }
 ```
-Testing the JDK version is equal to 1.7:
+Testing the JDK version is equal to 17:
 ```
 sweeney {
-    enforce type: "equal", expect: "1.7", value: {System.getProperty('java.version').substring(0,3)}
+    enforce type: "equal", expect: "17", value: {System.getProperty('java.version').substring(0,2)}
 }
 ```
 
@@ -167,7 +170,7 @@ sweeney {
 ```
 
 ## JDK Version
-This is a shorthand to test the jdk version, and is a form of specialisation of the VersionRange as such it does not require the 'value' to be defined and can take on a shorter syntax
+This is a shorthand to test the jdk version, and is a form of specialisation of the VersionRange as such it does not require the 'value' to be defined and can take on a shorter syntax. By default this rule is evaluated immediately on parsing of the definition.
 ```
 sweeney {
     // tests whether the jdk is version 1.7 or above
@@ -178,7 +181,7 @@ sweeney {
 ```
 
 ## Gradle Version
-Similar to the JDK version but testing the Gradle version instead
+Similar to the JDK version but testing the Gradle version instead. By default this rule is evaluated immediately on parsing of the definition.
 ```
 sweeney {
     // tests whether gradle is 2.0 or above
@@ -190,7 +193,7 @@ sweeney {
 
 # Failing fast
 If for example you want your some or all of your rules to run immediately you can provide a call to `validate`
-after the definition of the rules, for example to test the Java and Gradle versions you may run define the following rules and then invoke the validate method:
+after the definition of the rules, for example to test the Java and Gradle versions you may run define the following rules and then invoke the validate method. Note that now the gradle and JDK version rules by default are evaluated immediately.
 
 ```
 sweeney {
@@ -220,3 +223,5 @@ com.fizzpod.gradle.plugins.sweeney.rules.PatternRule
 com.fizzpod.gradle.plugins.sweeney.rules.EqualRule
 ```
 You then only need to include your library on the build script classpath and your implementations will be picked up.
+
+Note that as of version `6.0.0` the `Rule` interface has a breaking change on it, any custome rules will need to implement the new method or extend the AbstractRule which provides a default implementation.

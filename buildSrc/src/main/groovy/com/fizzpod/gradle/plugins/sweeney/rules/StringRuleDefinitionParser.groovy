@@ -21,7 +21,7 @@ class StringRuleDefinitionParser implements RuleDefinitionParser {
 		
 		String[] parts = definition.split("[:]");
 		
-		assert parts.length <= 4, 'Definition only supports maximum of 4 parts: ' + parts
+		assert parts.length <= 5, 'Definition only supports maximum of 5 parts: ' + parts
 		
 		parts.eachWithIndex() { obj, index ->
 			LOGGER.info("index: {}, obj: {}", index, obj);
@@ -30,6 +30,7 @@ class StringRuleDefinitionParser implements RuleDefinitionParser {
 				case 1: newDefinition.put("expect", {obj}); break;
 				case 2: newDefinition.put("value", {obj}); break;
 				case 3: newDefinition.put("msg", {obj}); break;
+				case 4: newDefinition.put("when", {obj}); break;
 			}
 		}
 		

@@ -48,10 +48,26 @@ class StringRuleDefinitionParserSpec extends ProjectSpec {
 	
 	def 'rule definition has too many parts'() {
 		when:
-			def str = "abc:def:ghi:jkl:bbb"
+			def str = "abc:def:ghi:jkl:bbb:lll"
 			def definition = new StringRuleDefinitionParser().parse(str)
 		then:
 			thrown(AssertionError)
+	}
+
+	def 'when is now'() {
+		when:
+			def str = "abc:def:ghi:jkl:now"
+			def definition = new StringRuleDefinitionParser().parse(str)
+		then:
+			definition.getAttribute("when").call().equals("now")
+	}
+
+	def 'when is not now'() {
+		when:
+			def str = "abc:def:ghi:jkl"
+			def definition = new StringRuleDefinitionParser().parse(str)
+		then:
+			definition.hasAttribute("when") == false
 	}
 	
 }

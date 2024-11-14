@@ -7,3 +7,11 @@ dependencies {
         exclude group: 'org.codehaus.groovy'
   }
 }
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+    }
+}

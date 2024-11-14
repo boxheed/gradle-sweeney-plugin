@@ -13,11 +13,12 @@ public class RuleLoader {
 		new SystemPropertyRule()
 	]
 
-	private static ServiceLoader<Rule> ruleServiceLoader = ServiceLoader
-			.load(Rule.class);
+	private static ServiceLoader<Rule> ruleServiceLoader = ServiceLoader.load(Rule.class);
 
 	def all () {
 		return ruleServiceLoader.asList() + DEFAULT_RULES;
 	}
-			
+
+	
+
 }

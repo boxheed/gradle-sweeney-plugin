@@ -5,7 +5,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 
-class GradleVersionRule implements Rule {
+class GradleVersionRule extends AbstractRule implements Rule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GradleVersionRule); 
 	
@@ -14,6 +14,10 @@ class GradleVersionRule implements Rule {
 	private static final String DEFAULT_MESSAGE = 'Gradle version $version is not within specification: $ruleDefinition'
 	private VersionRangeRule versionRangeRule = new VersionRangeRule();
 	
+	public GradleVersionRule() {
+		super(true)
+	}
+
 	@Override
 	public String getType() {
 		return GRADLE_TYPE_VALUE;

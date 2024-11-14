@@ -13,5 +13,25 @@ class MapRuleDefinitionParserSpec extends ProjectSpec {
 			definition.getAttribute("abc") instanceof Closure
 			definition.getAttribute("abc").call().equals("xyz")
 	}
+
+	def 'when is now'() {
+		when:
+			def map = ["when":"now"]
+			def definition = new MapRuleDefinitionParser().parse(map)
+		then:
+			definition != null
+			definition.getAttribute("when") instanceof Closure
+			definition.getAttribute("when").call().equals("now")
+	}
+
+	def 'when is not now'() {
+		when:
+			def map = ["when":"abc"]
+			def definition = new MapRuleDefinitionParser().parse(map)
+		then:
+			definition != null
+			definition.getAttribute("when") instanceof Closure
+			!definition.getAttribute("when").call().equals("now")
+	}
 	
 }

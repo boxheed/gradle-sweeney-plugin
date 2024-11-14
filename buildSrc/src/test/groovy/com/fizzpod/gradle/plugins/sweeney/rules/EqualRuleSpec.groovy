@@ -16,6 +16,7 @@ class EqualRuleSpec extends ProjectSpec {
 		then:
 			notThrown(AssertionError)
 			accept == true;
+			simpleRule.isRunNow(definition) == false
 	}
 	
 	def 'simple rule abc is not equal to def'() {
@@ -28,6 +29,26 @@ class EqualRuleSpec extends ProjectSpec {
 		then:
 			thrown(AssertionError)
 			accept == true;
+	}
+
+	def 'simple rule run now'() {
+		setup:
+			def stringDefinition = "equal:abc:def::now"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def runNow = simpleRule.isRunNow(definition)
+		then:
+			runNow == true;
+	}
+
+	def 'simple rule not run now'() {
+		setup:
+			def stringDefinition = "equal:abc:def::later"
+			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
+		when:
+			def runNow = simpleRule.isRunNow(definition)
+		then:
+			runNow == false;
 	}
 	
 }

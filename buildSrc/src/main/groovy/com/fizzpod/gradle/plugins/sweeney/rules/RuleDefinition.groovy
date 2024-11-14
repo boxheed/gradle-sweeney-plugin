@@ -20,7 +20,6 @@ class RuleDefinition {
 		return this.definition.containsKey(attribute);
 	}
 	
-	
 	public String toString() {
 		def m = [:]
 		definition.each{ k, v -> 

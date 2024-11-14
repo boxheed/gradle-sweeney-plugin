@@ -3,7 +3,7 @@ package com.fizzpod.gradle.plugins.sweeney.rules
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class PatternRule implements Rule {
+class PatternRule extends AbstractRule implements Rule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PatternRule); 
 	
