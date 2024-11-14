@@ -4,7 +4,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 
-class JdkVersionRule implements Rule {
+class JdkVersionRule extends AbstractRule implements Rule {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JdkVersionRule); 
 	
@@ -13,6 +13,9 @@ class JdkVersionRule implements Rule {
 
 	private VersionRangeRule versionRangeRule = new VersionRangeRule();
 
+	public JdkVersionRule() {
+		super(true)
+	}
 	
 	@Override
 	public String getType() {

@@ -12,10 +12,12 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = jdkVersionRule.accept(definition, project)
+			def runNow = jdkVersionRule.isRunNow(definition);
 			jdkVersionRule.validate(definition, project);
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
+			runNow == true
 	}
 
 	def 'jdk rule should not allow jdks less than and equal to 12'() {
@@ -24,10 +26,10 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = jdkVersionRule.accept(definition, project)
-			jdkVersionRule.validate(definition, project);
+			jdkVersionRule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 
 }
