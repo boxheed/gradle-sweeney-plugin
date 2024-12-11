@@ -1,22 +1,24 @@
-package com.fizzpod.gradle.plugins.sweeney.rules;
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
+package com.fizzpod.gradle.plugins.sweeney.rules
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 public class RuleRunner {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RuleRunner);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RuleRunner)
 
 	private RuleDefinitionProcessor processor = new RuleDefinitionProcessor()
 
-	private RuleLoader ruleLoader = new RuleLoader();
+	private RuleLoader ruleLoader = new RuleLoader()
 
-	private RuleDefinitionParserLoader ruleDefinitionParserLoader = new RuleDefinitionParserLoader();
+	private RuleDefinitionParserLoader ruleDefinitionParserLoader = new RuleDefinitionParserLoader()
 
-	private RunMode runMode = RunMode.ENFORCE;
+	private RunMode runMode = RunMode.ENFORCE
 
 	public RuleRunner(RunMode mode) {
-		runMode = mode;
+		runMode = mode
 	}
 
 	@Deprecated
@@ -29,7 +31,7 @@ public class RuleRunner {
 
 	public void runRules(def ruleDefinitions, def scope) {
 		ruleDefinitions.each { ruleDefinition ->
-			run(ruleDefinition.definition, ruleDefinition.rule, scope);
+			run(ruleDefinition.definition, ruleDefinition.rule, scope)
 		}
 	}
 
@@ -39,9 +41,9 @@ public class RuleRunner {
 			rule.validate(definition, scope)
 		} catch(AssertionError e) {
 			if(RunMode.ENFORCE == runMode) {
-				throw e;
+				throw e
 			} else {
-				LOGGER.warn("Warning: {}", e.getMessage());
+				LOGGER.warn("Warning: {}", e.getMessage())
 			}
 		}
 	}

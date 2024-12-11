@@ -1,4 +1,6 @@
-package com.fizzpod.gradle.plugins.sweeney.rules;
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
+package com.fizzpod.gradle.plugins.sweeney.rules
 
 public class RuleDefinitionParserLoader {
 
@@ -8,10 +10,10 @@ public class RuleDefinitionParserLoader {
 	]
 
 	private static ServiceLoader<RuleDefinitionParser> ruleDefinitionParserServiceLoader = ServiceLoader
-			.load(RuleDefinitionParser.class);
+			.load(RuleDefinitionParser.class)
 
 	def all () {
-		return ruleDefinitionParserServiceLoader.asList() + DEFAULT_PARSERS;
+		return ruleDefinitionParserServiceLoader.asList() + DEFAULT_PARSERS
 	}
 	
 }

@@ -1,3 +1,5 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import org.slf4j.Logger
@@ -11,29 +13,29 @@ class PatternRule extends AbstractRule implements Rule {
 
 	@Override
 	public String getType() {
-		return PATTERN_TYPE_VALUE;
+		return PATTERN_TYPE_VALUE
 	}
 
 	@Override
 	public boolean accept(RuleDefinition ruleDefinition, def scope) {
 		if(ruleDefinition.hasAttribute(TYPE_ATTRIBUTE) && PATTERN_TYPE_VALUE.equals(ruleDefinition.getAttribute(TYPE_ATTRIBUTE).call())) {
-			return true;
+			return true
 		} 
-		return false;
+		return false
 	}
 
 	@Override
 	public void validate(RuleDefinition ruleDefinition, def scope) {
 		String value = String.valueOf(ruleDefinition.getAttribute("value").call()); 
-		String expect = ruleDefinition.getAttribute("expect").call();
+		String expect = ruleDefinition.getAttribute("expect").call()
 		
-		LOGGER.info("Checking value {} with expected {}", value, expect);
-		assert value.matches(expect), Rule.DEFAULT_MESSAGE.format(ruleDefinition);
+		LOGGER.info("Checking value {} with expected {}", value, expect)
+		assert value.matches(expect), Rule.DEFAULT_MESSAGE.format(ruleDefinition)
 	}
 
 	@Override
 	public String toString() {
-		return getType();
+		return getType()
 	}
 	
 

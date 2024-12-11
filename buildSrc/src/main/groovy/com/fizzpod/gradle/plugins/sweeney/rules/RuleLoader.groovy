@@ -1,4 +1,6 @@
-package com.fizzpod.gradle.plugins.sweeney.rules;
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
+package com.fizzpod.gradle.plugins.sweeney.rules
 
 
 public class RuleLoader {
@@ -13,10 +15,10 @@ public class RuleLoader {
 		new SystemPropertyRule()
 	]
 
-	private static ServiceLoader<Rule> ruleServiceLoader = ServiceLoader.load(Rule.class);
+	private static ServiceLoader<Rule> ruleServiceLoader = ServiceLoader.load(Rule.class)
 
 	def all () {
-		return ruleServiceLoader.asList() + DEFAULT_RULES;
+		return ruleServiceLoader.asList() + DEFAULT_RULES
 	}
 
 	

@@ -1,10 +1,12 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import nebula.test.ProjectSpec
 
 class EqualRuleSpec extends ProjectSpec {
 
-	EqualRule simpleRule = new EqualRule();
+	EqualRule simpleRule = new EqualRule()
 
 	def 'simple rule abc is equal to abc'() {
 		setup:
@@ -12,10 +14,10 @@ class EqualRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = simpleRule.accept(definition, project)
-			simpleRule.validate(definition, project);
+			simpleRule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 			simpleRule.isRunNow(definition) == false
 	}
 	
@@ -25,10 +27,10 @@ class EqualRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = simpleRule.accept(definition, project)
-			simpleRule.validate(definition, project);
+			simpleRule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 
 	def 'simple rule run now'() {
@@ -38,7 +40,7 @@ class EqualRuleSpec extends ProjectSpec {
 		when:
 			def runNow = simpleRule.isRunNow(definition)
 		then:
-			runNow == true;
+			runNow == true
 	}
 
 	def 'simple rule not run now'() {
@@ -48,7 +50,7 @@ class EqualRuleSpec extends ProjectSpec {
 		when:
 			def runNow = simpleRule.isRunNow(definition)
 		then:
-			runNow == false;
+			runNow == false
 	}
 	
 }

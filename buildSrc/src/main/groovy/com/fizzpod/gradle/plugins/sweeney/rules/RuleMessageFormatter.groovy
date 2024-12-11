@@ -1,15 +1,17 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 public class RuleMessageFormatter {
 
-    private String msg = "";
+    private String msg = ""
 
     public RuleMessageFormatter() {
 
     }
 
     public RuleMessageFormatter(String msg) {
-        this.msg = msg;
+        this.msg = msg
     }
 
     public String format(RuleDefinition ruleDefinition) {
@@ -17,10 +19,10 @@ public class RuleMessageFormatter {
     }
 
     public String format(RuleDefinition ruleDefinition, Map extras) {
-        def binding = resolveBinding(ruleDefinition);
-        binding.putAll(extras);
+        def binding = resolveBinding(ruleDefinition)
+        binding.putAll(extras)
         binding.put("ruleDefinition", ruleDefinition)
-        def message = resolveMessage(binding);
+        def message = resolveMessage(binding)
         def engine = new groovy.text.SimpleTemplateEngine()
 		def template = engine.createTemplate(message).make(binding)
         return template.toString()
@@ -28,17 +30,17 @@ public class RuleMessageFormatter {
 
     private String resolveMessage(def binding) {
         if(binding.containsKey(Rule.MSG_ATTRIBUTE)) {
-            return binding.msg;
+            return binding.msg
         }
-        return msg;
+        return msg
     }
 
     private Map resolveBinding(RuleDefinition ruleDefinition) {
 		def m = [:]
 		ruleDefinition.getDefinition().each{ k, v -> 
-			m.put(k, v.call());
+			m.put(k, v.call())
 		}
-		return m;
+		return m
     }
 
 }

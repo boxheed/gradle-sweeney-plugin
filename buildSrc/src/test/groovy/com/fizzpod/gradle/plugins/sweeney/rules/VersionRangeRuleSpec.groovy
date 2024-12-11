@@ -1,10 +1,12 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import nebula.test.ProjectSpec
 
 class VersionRangeRuleSpec extends ProjectSpec {
 
-	VersionRangeRule rule = new VersionRangeRule();
+	VersionRangeRule rule = new VersionRangeRule()
 
 	def 'versions equal to a specific lower version'() {
 		setup:
@@ -12,10 +14,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions greater than a specific lower version'() {
@@ -24,10 +26,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	
@@ -37,10 +39,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions less than a specific lower version'() {
@@ -49,10 +51,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions equal to a specific upper version'() {
@@ -61,10 +63,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions less than a specific upper version'() {
@@ -73,10 +75,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	
@@ -86,10 +88,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions greater than a specific upper version'() {
@@ -98,10 +100,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions between version range'() {
@@ -110,10 +112,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions at lower version range'() {
@@ -122,10 +124,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions at upper version range'() {
@@ -134,10 +136,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions at lower version range excluded'() {
@@ -146,10 +148,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions at upper version range excluded'() {
@@ -158,10 +160,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions at below version range'() {
@@ -170,10 +172,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'versions above version range excluded'() {
@@ -182,10 +184,10 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'minor versions .10 should be higher than .1'() {
@@ -194,9 +196,9 @@ class VersionRangeRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 }
