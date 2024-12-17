@@ -1,26 +1,27 @@
-package com.fizzpod.gradle.plugins.sweeney;
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
+package com.fizzpod.gradle.plugins.sweeney
 
+import com.fizzpod.gradle.plugins.sweeney.rules.RuleDefinitionProcessor
+import com.fizzpod.gradle.plugins.sweeney.rules.RuleRunner
+import com.fizzpod.gradle.plugins.sweeney.rules.RunMode
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import com.fizzpod.gradle.plugins.sweeney.rules.RuleRunner
-import com.fizzpod.gradle.plugins.sweeney.rules.RunMode
-import com.fizzpod.gradle.plugins.sweeney.rules.RuleDefinitionProcessor
-
 public class SweeneyPluginExtension {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(SweeneyPluginExtension.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SweeneyPluginExtension.class)
 	
 	def RuleDefinitionProcessor processor = new RuleDefinitionProcessor()
 
-	def defaultScope;
+	def defaultScope
 	
-	def enforceableRules = [];
+	def enforceableRules = []
 
-	def cautionaryRules = [];
+	def cautionaryRules = []
 
 	SweeneyPluginExtension(def defaultScope) {
-		this.defaultScope = defaultScope;
+		this.defaultScope = defaultScope
 	}
 	
 	void enforce(def args) {
@@ -28,7 +29,7 @@ public class SweeneyPluginExtension {
 		def rule = processor.process(args, defaultScope)
 		enforceableRules << rule
 		if(rule.rule.isRunNow(rule.definition)) {
-			RuleRunner runner = new RuleRunner(RunMode.ENFORCE);
+			RuleRunner runner = new RuleRunner(RunMode.ENFORCE)
 			runner.applyRules([args], defaultScope)
 		}
 	}
@@ -40,24 +41,24 @@ public class SweeneyPluginExtension {
 	}
 	
 	void validate() {
-		this.validate(null);
+		this.validate(null)
 	}
 	
 	void validate(def scope) {
 		if(scope == null) {
-			scope = defaultScope;
+			scope = defaultScope
 		}
 		runEnforcementRules(scope)
 		runCautionRules(scope)
 	}
 
 	void runEnforcementRules(def scope) {
-		RuleRunner runner = new RuleRunner(RunMode.ENFORCE);
+		RuleRunner runner = new RuleRunner(RunMode.ENFORCE)
 		runner.runRules(enforceableRules, scope)
 	}
 	
 	void runCautionRules(def scope) {
-		RuleRunner runner = new RuleRunner(RunMode.CAUTION);
+		RuleRunner runner = new RuleRunner(RunMode.CAUTION)
 		runner.runRules(cautionaryRules, scope)
 	}
 	

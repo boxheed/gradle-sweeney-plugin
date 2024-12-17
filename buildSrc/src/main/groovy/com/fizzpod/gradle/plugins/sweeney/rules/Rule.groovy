@@ -1,3 +1,5 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 interface Rule {
@@ -10,9 +12,9 @@ interface Rule {
 	static final String MSG_ATTRIBUTE = "msg"
 	static final String WHEN_NOW_VALUE = "now"
 
-	static final RuleMessageFormatter DEFAULT_MESSAGE = new RuleMessageFormatter('Validation failed for rule definition: $ruleDefinition');
+	static final RuleMessageFormatter DEFAULT_MESSAGE = new RuleMessageFormatter('Validation failed for rule definition: $ruleDefinition')
 	
-	String getType();
+	String getType()
 	
 	boolean accept(RuleDefinition ruleDefinition, def scope)
 	

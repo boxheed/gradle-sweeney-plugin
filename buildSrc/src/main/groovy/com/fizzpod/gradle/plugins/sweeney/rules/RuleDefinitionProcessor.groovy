@@ -1,3 +1,5 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import org.slf4j.Logger
@@ -5,11 +7,11 @@ import org.slf4j.LoggerFactory
 
 public class RuleDefinitionProcessor {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RuleRunner);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RuleRunner)
 
-	private RuleLoader ruleLoader = new RuleLoader();
+	private RuleLoader ruleLoader = new RuleLoader()
 
-	private RuleDefinitionParserLoader ruleDefinitionParserLoader = new RuleDefinitionParserLoader();
+	private RuleDefinitionParserLoader ruleDefinitionParserLoader = new RuleDefinitionParserLoader()
 
 	def process(def spec, def scope) {
 		def definition = convertToDefinition(spec)
@@ -30,15 +32,15 @@ public class RuleDefinitionProcessor {
 	}
 
 	private Rule matchDefinitionToRule(def definition, def scope) {
-		def rule = null;
+		def rule = null
 		ruleLoader.all().each { it ->
-			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), definition);
+			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), definition)
 			if(it.accept(definition, scope)) {
-				rule = it;
+				rule = it
 			}
 		}
 		if(rule == null) {
-			throw new IllegalArgumentException("Rule definition does not match any rule: " + definition);
+			throw new IllegalArgumentException("Rule definition does not match any rule: " + definition)
 		}
 		return rule
 	}

@@ -1,10 +1,12 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import nebula.test.ProjectSpec
 
 class JdkVersionRuleSpec extends ProjectSpec {
 
-	JdkVersionRule jdkVersionRule = new JdkVersionRule();
+	JdkVersionRule jdkVersionRule = new JdkVersionRule()
 
 	def 'jdk rule should not allow jdks less than 1.7'() {
 		setup:
@@ -12,8 +14,8 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = jdkVersionRule.accept(definition, project)
-			def runNow = jdkVersionRule.isRunNow(definition);
-			jdkVersionRule.validate(definition, project);
+			def runNow = jdkVersionRule.isRunNow(definition)
+			jdkVersionRule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
 			accept == true

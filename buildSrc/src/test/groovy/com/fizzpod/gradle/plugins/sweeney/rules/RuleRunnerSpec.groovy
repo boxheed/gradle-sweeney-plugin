@@ -1,10 +1,12 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import nebula.test.ProjectSpec
 
 class RuleRunnerSpec extends ProjectSpec {
 
-	def processor = new RuleDefinitionProcessor();
+	def processor = new RuleDefinitionProcessor()
 
 	def 'the rule should pass'() {
 		when:

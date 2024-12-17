@@ -1,10 +1,12 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import nebula.test.ProjectSpec
 
 class BooleanRuleSpec extends ProjectSpec {
 
-	BooleanRule rule = new BooleanRule();
+	BooleanRule rule = new BooleanRule()
 
 	def 'true is true'() {
 		setup:
@@ -12,10 +14,10 @@ class BooleanRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			notThrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 	def 'false is not true'() {
@@ -24,10 +26,10 @@ class BooleanRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 		def 'banana is not true'() {
@@ -36,10 +38,10 @@ class BooleanRuleSpec extends ProjectSpec {
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = rule.accept(definition, project)
-			rule.validate(definition, project);
+			rule.validate(definition, project)
 		then:
 			thrown(AssertionError)
-			accept == true;
+			accept == true
 	}
 	
 }

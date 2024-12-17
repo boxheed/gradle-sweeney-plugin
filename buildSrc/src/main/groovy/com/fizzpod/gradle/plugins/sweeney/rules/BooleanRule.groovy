@@ -1,3 +1,5 @@
+/* (C) 2024 */
+/* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
 import org.slf4j.Logger
@@ -11,28 +13,28 @@ class BooleanRule extends AbstractRule implements Rule {
 
 	@Override
 	public String getType() {
-		return BOOLEAN_TYPE_VALUE;
+		return BOOLEAN_TYPE_VALUE
 	}
 
 	@Override
 	public boolean accept(RuleDefinition ruleDefinition, def scope) {
 		if(ruleDefinition.hasAttribute(TYPE_ATTRIBUTE) && BOOLEAN_TYPE_VALUE.equals(ruleDefinition.getAttribute(TYPE_ATTRIBUTE).call())) {
-			return true;
+			return true
 		} 
-		return false;
+		return false
 	}
 
 	@Override
 	public void validate(RuleDefinition ruleDefinition, def scope) {
 		boolean value = Boolean.valueOf(ruleDefinition.getAttribute(VALUE_ATTRIBUTE).call()); 
 	
-		LOGGER.info("Checking value {} is true", value);
-		assert value, Rule.DEFAULT_MESSAGE.format(ruleDefinition);
+		LOGGER.info("Checking value {} is true", value)
+		assert value, Rule.DEFAULT_MESSAGE.format(ruleDefinition)
 	}
 
 	@Override
 	public String toString() {
-		return getType();
+		return getType()
 	}
 	
 
