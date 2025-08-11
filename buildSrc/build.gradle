@@ -1,5 +1,5 @@
 dependencies {
-	testImplementation('com.netflix.nebula:nebula-test:10.6.2') {
+	testImplementation('com.netflix.nebula:nebula-test:11.1.5') {
         exclude group: 'org.codehaus.groovy'
   }
 }
