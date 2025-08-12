@@ -1,12 +1,13 @@
 dependencies {
-	testImplementation('com.netflix.nebula:nebula-test:10.6.2') {
-        exclude group: 'org.codehaus.groovy'
-  }
+    testImplementation('com.netflix.nebula:nebula-test:11.1.5') 
+    testImplementation('org.spockframework:spock-core:2.3-groovy-4.0')
+    testImplementation("org.spockframework:spock-junit4:2.3-groovy-4.0")
+    testImplementation("org.junit.vintage:junit-vintage-engine:5.13.4")
+
 }
 
 test {
     useJUnitPlatform()
-
     testLogging {
         events "started", "passed", "skipped", "failed"
     }

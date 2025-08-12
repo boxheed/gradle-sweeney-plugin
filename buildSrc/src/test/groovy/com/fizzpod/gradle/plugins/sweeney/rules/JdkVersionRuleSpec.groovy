@@ -1,4 +1,4 @@
-/* (C) 2024 */
+/* (C) 2024-2025 */
 /* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
@@ -22,9 +22,9 @@ class JdkVersionRuleSpec extends ProjectSpec {
 			runNow == true
 	}
 
-	def 'jdk rule should not allow jdks less than and equal to 12'() {
+	def 'jdk rule should not allow jdks less than and equal to 18'() {
 		setup:
-			def stringDefinition = "jdk:]12,)"
+			def stringDefinition = "jdk:]18,)"
 			def definition = new StringRuleDefinitionParser().parse(stringDefinition)
 		when:
 			def accept = jdkVersionRule.accept(definition, project)
