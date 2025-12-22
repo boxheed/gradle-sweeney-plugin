@@ -1,7 +1,7 @@
 dependencies {
     testImplementation('com.netflix.nebula:nebula-test:11.11.3') 
-    testImplementation('org.spockframework:spock-core:2.4-groovy-4.0')
-    testImplementation("org.spockframework:spock-junit4:2.4-groovy-4.0")
+    testImplementation('org.spockframework:spock-core:2.4-groovy-5.0')
+    testImplementation("org.spockframework:spock-junit4:2.4-groovy-5.0")
     testImplementation("org.junit.vintage:junit-vintage-engine:6.0.1")
 
 }
