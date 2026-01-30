@@ -221,6 +221,8 @@ class VersionRangeRule extends AbstractRule implements Rule {
 
 	public class Version implements Comparable<Version> {
 
+		private static final Pattern VERSION_PATTERN = Pattern.compile("[0-9]+(\\.[0-9]+)*")
+
 		private String version
 
 		public final String get() {
@@ -229,7 +231,7 @@ class VersionRangeRule extends AbstractRule implements Rule {
 
 		public Version(String version) {
 			assert version != null, "Version cannot be null"
-			assert version.matches("[0-9]+(\\.[0-9]+)*"), "Invalid version format: $version"
+			assert VERSION_PATTERN.matcher(version).matches(), "Invalid version format: $version"
 			this.version = version
 		}
 
