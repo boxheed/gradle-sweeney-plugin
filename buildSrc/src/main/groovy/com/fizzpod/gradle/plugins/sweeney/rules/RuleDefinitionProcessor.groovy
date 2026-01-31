@@ -32,12 +32,9 @@ public class RuleDefinitionProcessor {
 	}
 
 	private Rule matchDefinitionToRule(def definition, def scope) {
-		def rule = null
-		ruleLoader.all().each { it ->
+		def rule = ruleLoader.all().find { it ->
 			LOGGER.info("Checking whether rule {} accepts definition {}", it.getType(), definition)
-			if(it.accept(definition, scope)) {
-				rule = it
-			}
+			it.accept(definition, scope)
 		}
 		if(rule == null) {
 			throw new IllegalArgumentException("Rule definition does not match any rule: " + definition)
