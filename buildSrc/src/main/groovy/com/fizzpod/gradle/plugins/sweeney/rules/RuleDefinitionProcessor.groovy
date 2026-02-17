@@ -20,15 +20,11 @@ public class RuleDefinitionProcessor {
 	}
 
 	private RuleDefinition convertToDefinition(def spec) {
-		def convertedRuleDefinition = null
 		LOGGER.debug("Using rules: {}", ruleDefinitionParserLoader.all())
-		ruleDefinitionParserLoader.all().each { it ->
+		return ruleDefinitionParserLoader.all().findResult { it ->
 			LOGGER.info("Using parser: {}", it)
-			if(convertedRuleDefinition == null) {
-				convertedRuleDefinition = it.parse(spec)
-			}
+			return it.parse(spec)
 		}
-		return convertedRuleDefinition
 	}
 
 	private Rule matchDefinitionToRule(def definition, def scope) {
