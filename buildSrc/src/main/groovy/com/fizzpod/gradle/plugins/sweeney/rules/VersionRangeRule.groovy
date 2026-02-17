@@ -18,7 +18,6 @@ class VersionRangeRule extends AbstractRule implements Rule {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(VersionRangeRule)
 
-	// todo: check these constants
 	private static final String OPEN_INC = "["
 
 	private static final String OPEN_EXC = "]"

@@ -1,4 +1,4 @@
-/* (C) 2024 */
+/* (C) 2024-2026 */
 /* SPDX-License-Identifier: Apache-2.0 */
 package com.fizzpod.gradle.plugins.sweeney.rules
 
@@ -11,9 +11,9 @@ class StringRuleDefinitionParser implements RuleDefinitionParser {
 
 	def RuleDefinition parse(def definition) {
 		RuleDefinition ruleDefinition = null
-		if(definition instanceof String) {
+		if(definition instanceof CharSequence) {
 			LOGGER.info("Parsing definition: {}", definition)
-			ruleDefinition = new RuleDefinition(buildDefinition(definition))
+			ruleDefinition = new RuleDefinition(buildDefinition(definition.toString()))
 		}
 		return ruleDefinition
 	}
