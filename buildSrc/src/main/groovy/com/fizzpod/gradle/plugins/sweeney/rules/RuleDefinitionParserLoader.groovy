@@ -17,5 +17,5 @@ public class RuleDefinitionParserLoader {
 	def all () {
 		return CACHED_PARSERS
 	}
-	
+
 }
