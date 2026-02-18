@@ -4,6 +4,7 @@ package com.fizzpod.gradle.plugins.sweeney.rules
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import groovy.transform.CompileStatic
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -219,6 +220,7 @@ class VersionRangeRule extends AbstractRule implements Rule {
 		}
 	}
 
+	@CompileStatic
 	public class Version implements Comparable<Version> {
 
 		private static final Pattern VERSION_PATTERN = Pattern.compile("[0-9]+(\\.[0-9]+)*")
@@ -238,20 +240,48 @@ class VersionRangeRule extends AbstractRule implements Rule {
 		@Override public int compareTo(Version that) {
 			if(that == null)
 				return 1
-			String[] thisParts = this.get().split("\\.")
-			String[] thatParts = that.get().split("\\.")
-			int length = Math.max(thisParts.length, thatParts.length)
-			for(int i = 0; i < length; i++) {
-				int thisPart = i < thisParts.length ?
-						Integer.parseInt(thisParts[i]) : 0
-				int thatPart = i < thatParts.length ?
-						Integer.parseInt(thatParts[i]) : 0
-				if(thisPart < thatPart)
-					return -1
-				if(thisPart > thatPart)
-					return 1
+			String v1 = this.get()
+			String v2 = that.get()
+			int i1 = 0
+			int i2 = 0
+			int len1 = v1.length()
+			int len2 = v2.length()
+
+			while (i1 < len1 || i2 < len2) {
+				int val1 = 0
+				if (i1 < len1) {
+					int start1 = i1
+					while (i1 < len1 && v1.charAt(i1) != '.') {
+						i1++
+					}
+					val1 = parsePart(v1, start1, i1)
+					if (i1 < len1) i1++
+				}
+
+				int val2 = 0
+				if (i2 < len2) {
+					int start2 = i2
+					while (i2 < len2 && v2.charAt(i2) != '.') {
+						i2++
+					}
+					val2 = parsePart(v2, start2, i2)
+					if (i2 < len2) i2++
+				}
+
+				if (val1 < val2) return -1
+				if (val1 > val2) return 1
 			}
 			return 0
+		}
+
+		private int parsePart(String s, int start, int end) {
+			int result = 0
+			for (int i = start; i < end; i++) {
+				char c = s.charAt(i)
+				// we assume valid input as per regex validation in constructor
+				result = result * 10 + (c - (char)'0')
+			}
+			return result
 		}
 
 		@Override public boolean equals(Object that) {
