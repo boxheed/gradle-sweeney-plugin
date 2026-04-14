@@ -1,3 +1,11 @@
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
 dependencies {
     testImplementation('com.netflix.nebula:nebula-test:11.11.3') 
     testImplementation('org.spockframework:spock-core:2.4-groovy-4.0')
@@ -17,5 +25,6 @@ test {
     useJUnitPlatform()
     testLogging {
         events "started", "passed", "skipped", "failed"
+        showStandardStreams = true
     }
 }

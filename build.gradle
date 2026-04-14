@@ -15,7 +15,7 @@ buildscript {
   }
 }
 
-apply plugin: 'com.fizzpod.pater-build'
+// apply plugin: 'com.fizzpod.pater-build'
 apply from: 'buildSrc/build.gradle'
 
 sourceSets {
