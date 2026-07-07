@@ -18,18 +18,26 @@ class VersionRangeRule extends AbstractRule implements Rule {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(VersionRangeRule)
 
+	// Inclusive open bracket for both Ivy and Maven
 	private static final String OPEN_INC = "["
 
+	// Exclusive open bracket for Ivy
 	private static final String OPEN_EXC = "]"
+	// Exclusive open bracket for Maven
 	private static final String OPEN_EXC_MAVEN = "("
 
+	// Inclusive close bracket for both Ivy and Maven
 	private static final String CLOSE_INC = "]"
 
+	// Exclusive close bracket for Ivy
 	private static final String CLOSE_EXC = "["
+	// Exclusive close bracket for Maven
 	private static final String CLOSE_EXC_MAVEN = ")"
 
+	// Lower infinite bound for both Ivy and Maven
 	private static final String LOWER_INFINITE = "("
 
+	// Upper infinite bound for both Ivy and Maven
 	private static final String UPPER_INFINITE = ")"
 
 	private static final String SEPARATOR = ","
