@@ -87,6 +87,8 @@ class VersionRangeRule extends AbstractRule implements Rule {
 
 	public static final String VERSION_RANGE_TYPE_VALUE = "range"
 
+	private static final RuleMessageFormatter FORMATTER = new RuleMessageFormatter('Version $version is not within specification: $ruleDefinition')
+
 	@Override
 	public String getType() {
 		return VERSION_RANGE_TYPE_VALUE
@@ -122,12 +124,11 @@ class VersionRangeRule extends AbstractRule implements Rule {
 	@Override
 	public void validate(RuleDefinition ruleDefinition, def scope) {
 		LOGGER.info("Validating {}", ruleDefinition)
-		RuleMessageFormatter formatter = new RuleMessageFormatter('Version $version is not within specification: $ruleDefinition')
 		String expect = getExpect(ruleDefinition)
 		Version version = getVersion(ruleDefinition)
 		LowerVersion lowerVersion = getLowerVersion(expect)
 		UpperVersion upperVersion = getUpperVersion(expect)
-		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), formatter.format(ruleDefinition, ["version":version]) 
+		assert (lowerVersion.isBelow(version) && upperVersion.isAbove(version)), FORMATTER.format(ruleDefinition, ["version":version])
 	}
 
 	private String getExpect(RuleDefinition ruleDefinition) {
